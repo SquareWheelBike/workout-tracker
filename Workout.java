@@ -1,10 +1,10 @@
-import java.awt.*;
-import javax.swing.*;
 
-import GUI.HomePage;
+import src.initUI;
+
 
 public class Workout {
     public static void main(String[] args){
-        initUI UI = new initUI();
+        new initUI();
+
     }
 }
