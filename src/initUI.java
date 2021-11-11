@@ -6,7 +6,7 @@ import javax.swing.*;
 public class initUI extends JFrame{
 
     private JPanel mainArea, taskBar;
-    private JPanel exerciseUI, taskBarUI, homePageUI;
+    private JPanel exerciseUI, taskBarUI, homePageUI, workoutPageUI, scheduleUI, settingsUI;
 
     /**
      * Create Startup Screen and all default parameters.
@@ -17,6 +17,9 @@ public class initUI extends JFrame{
         exerciseUI = new ExercisesUI(this);
         taskBarUI = new TaskBarUI(this);
         homePageUI = new HomePageUI();
+        workoutPageUI = new WorkoutsUI(this);
+        scheduleUI = new ScheduleUI(this);
+        settingsUI = new SettingsUI(this);
 
         //Set taskbar layout
         setLayout(new BorderLayout()); 
@@ -33,6 +36,7 @@ public class initUI extends JFrame{
 
         //Set Jframe parameters
         setTitle("Workout");
+        setResizable(false);
         setAlwaysOnTop(true);
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -52,6 +56,15 @@ public class initUI extends JFrame{
                 break;
             case 1:
                 mainArea.add(exerciseUI);
+                break;
+            case 2:
+                mainArea.add(workoutPageUI);
+                break;
+            case 3:
+                mainArea.add(scheduleUI);
+                break;
+            case 4:
+                mainArea.add(settingsUI);
                 break;
             default:
                 System.out.println("Error: Invalid option");

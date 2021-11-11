@@ -11,7 +11,7 @@ public class HomePageUI extends JPanel {
 
     public HomePageUI() {
         //construct components
-        welcomeLabel = new JLabel ("Welcome to Our Workout Program!",  SwingConstants.CENTER);
+        welcomeLabel = new JLabel ("Welcome Back {Name Goes Here}!",  SwingConstants.CENTER);
 
         add (welcomeLabel);
 
