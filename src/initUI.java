@@ -5,32 +5,26 @@ import javax.swing.*;
 
 public class initUI extends JFrame{
 
-    private JPanel mainArea;
+    private JPanel mainArea, taskBar;
 
     public initUI(){
+        //setLayout(new GridLayout(2,1));
+        setLayout(new BorderLayout()); 
 
-
-        mainArea = new JPanel();
-        mainArea.setLayout(new GridLayout(2,1));
-        mainArea.add(new HomePage());
-        add(mainArea);
-
-        //JPanel HomePage = new HomePage();
+        mainArea = new JPanel();        
+        mainArea.add(new ExercisesUI());
+        //mainArea.setBackground(Color.blue);
+        add(mainArea); 
         
-        
-        mainArea.add(new TaskBarUI());
+        taskBar = new JPanel();
+        taskBar.add(new TaskBarUI());
+        //taskBar.setBackground(Color.green);
+        add(taskBar, BorderLayout.SOUTH); 
 
         setTitle("Workout");
+        setAlwaysOnTop(true);
         setSize(600, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
-
-//        JFrame frame = new JFrame ("Workout");
-//        frame.setAlwaysOnTop(true);
-//        frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-//        frame.getContentPane().add (new HomePage());
-//        frame.getContentPane().add (new TaskBarUI());
-//        frame.pack();
-//        frame.setVisible (true);
     }
 }

@@ -18,19 +18,11 @@ public class TaskBarUI extends JPanel {
         settings = new JButton ("Settings");
         exercise = new JButton ("Exersices");
         
-        //set component bounds (only needed by Absolute Positioning)
-        exercise.setBounds(0, 500, 150, 100);
-        workouts.setBounds(150, 500, 150, 100);
-        schedule.setBounds(300, 500, 150, 100);
-        settings.setBounds(450, 500, 150, 100);
-
         //add components
         add (exercise);
         add (workouts);
         add (schedule);
         add (settings);
-
-
     }
 
     public JButton getWorkoutButton(){

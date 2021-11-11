@@ -15,7 +15,7 @@ public class ExercisesUI extends JPanel {
         add(selectLabel);
 
         //Create Drop box
-        exersices = new JComboBox<>(list.getExersiseList().toArray(new String[0]));
+        exersices = new JComboBox<String>(list.getExersiseList().toArray(new String[0]));
         add(exersices);
         exersices.setBounds (250, 10, 300, 50);
 
