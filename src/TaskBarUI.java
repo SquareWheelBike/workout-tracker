@@ -58,13 +58,15 @@ public class TaskBarUI extends JPanel implements ActionListener {
             System.out.println("Exercise button pressed");
         }
         else if(e.getSource() == schedule){
+            parentUI.setMainArea(3);
             System.out.println("Schedule button pressed");
         }
         else if(e.getSource() == settings){
-            parentUI.setMainArea(0);
+            parentUI.setMainArea(4);
             System.out.println("Settings button pressed");
         }
         else if(e.getSource() == workouts){
+            parentUI.setMainArea(2);
             System.out.println("Workouts button pressed");
         }
         else{
