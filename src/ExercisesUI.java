@@ -2,68 +2,130 @@ package src;
 
 import java.awt.*;
 import java.awt.event.*;
+//import java.util.ArrayList;
+
 import javax.swing.*;
 //import javax.swing.event.*;
 
 public class ExercisesUI extends JPanel implements ActionListener{
 
-    private JComboBox<String> exersices;
-    private JLabel selectLabel, message;
+    private JComboBox<String> exersices, types;
+    private JLabel selectExersice, selectType;
     private initUI parentUI;
-    private Exercises list;
+    private Exercises exercisesList;
+    private JPanel typesPanel, listPanel, detailsPanel;
 
     public ExercisesUI(initUI parentUI) {
         this.parentUI = parentUI;
 
         setLayout(new BorderLayout());
 
-        list = new Exercises();
-        list.testExercises();
+        //Gets exercises from the database
+        /*using test database until setup correctly*/
+        exercisesList = new Exercises();
+        exercisesList.testExercises2();
 
-        //Create Label
-        selectLabel = new JLabel("Please Select a Exersice:  ");
-        add(selectLabel, BorderLayout.LINE_START);
-
-        //Create Drop box
-        exersices = new JComboBox<String>(list.getExersiseList().toArray(new String[0]));
-        exersices.addActionListener(this);
-        add(exersices, BorderLayout.LINE_END);
-        //exersices.setBounds (250, 10, 300, 50);
-
-        //Create message when user clicks
-        message = new JLabel("Selected");
-
+        //Creates the drop down menu for the Types
+        showTypes();
     }
 
+    /**
+     * if the user clicks on a type, it will show the exercises for that type
+     * if the user clicks on an exercise, it will show the details for that exercise
+     */
     public void actionPerformed(ActionEvent e) {
-        //String s = (String)exersices.getSelectedItem();
-        System.out.print("ExercisesUI: "); 
-        String s = (String)exersices.getSelectedItem();
-        switch(s){
-            case "Push Ups":
-                System.out.println("Push Ups selected");
-                break;
-            case "Sit Ups":
-                System.out.println("Sit Ups selected");
-                break;
-            case "Chin Ups":
-                System.out.println("Chin Up selected");
-                break;
-            default:
-                System.out.println("Unknown selected");
-        }
-        setExercise(s);
-    }
+        System.out.print("ExerciseUI: ");
 
-    public void setExercise(String option){
-        remove(message);
-        message.setText(option + " Selected");
-        message.setHorizontalAlignment(SwingConstants.CENTER);
-        add(message, BorderLayout.PAGE_END);
-        updateFrame();
+        //If user selected a type
+        if (e.getSource() == types) {
+            System.out.println("Type Selected: " + types.getSelectedItem());
+            //remove all panels
+            
+            //Check if details is already displaying
+            if(detailsPanel != null){
+                if(detailsPanel.isShowing()){
+                    System.out.println("Removing detailsPanel");
+                    remove(detailsPanel);
+                }
+            }
+            
+            //Check if exercise list is already displaying
+            if(listPanel != null){
+                if(listPanel.isShowing()){
+                    System.out.println("Removing List");
+                    remove(listPanel);
+                }
+            }
+            String s = (String) types.getSelectedItem();
+            showExercises(s);
+        }
+
+        //If user selected a exercise from a type
+        else if (e.getSource() == exersices) {
+            System.out.println("Exercise Selected: " + exersices.getSelectedItem());
+            String s = (String) exersices.getSelectedItem();
+            //Display exercise details
+            showExerciseDetails(s);
+        }
+
+        else{
+            System.out.println("Not found Element: " + e.getSource() + " \n" + e.getActionCommand());
+        }
+        
     }
 
     public void updateFrame(){
         parentUI.updateDisplay();
+    }
+
+    public void showTypes(){
+        //Create new panel to format layout
+        typesPanel = new JPanel();
+
+        //Create Label for Type of Exercise
+        selectType = new JLabel("Please Select a Type of Exersice:  ");
+        typesPanel.add(selectType, BorderLayout.NORTH);
+        
+        //Create Drop box
+        types = new JComboBox<String>(exercisesList.getTypeList().toArray(new String[0]));
+        types.addActionListener(this);
+        typesPanel.add(types, BorderLayout.NORTH);
+
+        //Add panel to the ExercisesUI Panel
+        add(typesPanel, BorderLayout.NORTH);
+        updateFrame();
+
+    }
+
+    public void showExercises(String type){
+        //Create new panel to format layout
+        listPanel = new JPanel();
+
+        //Create Label for Exercise
+        selectExersice = new JLabel("Please Select a Exersice:  ");
+        listPanel.add(selectExersice, BorderLayout.CENTER);
+
+        //Create Drop box
+        exersices = new JComboBox<String>(exercisesList.getExersicesFromType(type).toArray(new String[0]));
+        exersices.addActionListener(this);
+        listPanel.add(exersices);
+
+        //Add panel to the ExercisesUI Panel
+        add(listPanel, BorderLayout.CENTER);
+        updateFrame();
+    }
+
+    public void showExerciseDetails(String exercise){
+        if(detailsPanel != null){
+            remove(detailsPanel);
+        }
+        //Create new panel to format layout
+        detailsPanel = new JPanel();
+        
+        detailsPanel.add(new JLabel(String.format("Selected Exercise: %s", exercise)));
+
+        //Add panel to the ExercisesUI Panel
+        add(detailsPanel, BorderLayout.SOUTH);
+        updateFrame();
     }
 }
