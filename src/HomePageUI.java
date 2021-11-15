@@ -13,31 +13,33 @@ import javax.imageio.ImageIO;
 
 public class HomePageUI extends JPanel {
     
-    private JLabel welcomeLabel, logoPic;
+    private JLabel welcomeLabel, logoPic, creators;
     private String userName;
     private BufferedImage logoPicture;
 
     public HomePageUI() {
         userName = "{Name Goes Here}";
+        setLayout(new BorderLayout(0,10));
 
         //construct components
-        welcomeLabel = new JLabel ("Welcome Back " + userName + "!",  SwingConstants.CENTER);
 
         //Add picture
         //Source: https://cdn2.vectorstock.com/i/1000x1000/53/96/workout-logo-with-triangle-man-vector-4235396.jpg
         try{
             logoPicture = ImageIO.read(new File("src/Pictures/Logo.jpg"));
-            logoPic = new JLabel(new ImageIcon(logoPicture));
-            add(logoPic);
-            logoPic.setBounds (100, 100, 100, 100);
+            Image scaledlogo = logoPicture.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
+            logoPic = new JLabel(new ImageIcon(scaledlogo));
+            add(logoPic, BorderLayout.CENTER);
         }catch (IOException e){
             System.out.print("HomepageUI: ");
             System.out.println("Error Reading Picture");
         }
 
+        welcomeLabel = new JLabel ("Welcome Back " + userName + "!",  SwingConstants.CENTER);
+        add (welcomeLabel, BorderLayout.PAGE_START);
 
-        add (welcomeLabel);
-
-        welcomeLabel.setBounds (0, 10, 600, 20);
+        creators =  new JLabel ("Created by: Liam, Cole, and Mathew", SwingConstants.CENTER);
+        add (creators, BorderLayout.PAGE_END);
+        
     }
 }
