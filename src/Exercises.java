@@ -2,22 +2,46 @@ package src;
 
 import java.util.*;
 import java.io.*;
-//meep
+
 public class Exercises implements Serializable{
-    private ArrayList<String> exercisesList;
+    private HashMap<String, ArrayList<String>> exercises;
 
     public Exercises() {
-        this.exercisesList = new ArrayList<>(); 
+        this.exercises = new HashMap<>();
     }
 
-    public void addExercise(String exercise){
-        this.exercisesList.add(exercise);
+    /**
+     * adds new exercise to list if type exist, if type does not exist, return false
+     * @param type String of type of exercise
+     * @param exercise string of exercise
+     * @return true if successfully added, false if type does not exist
+     */
+    public boolean addExercise(String type, String exercise){
+        if(this.exercises.containsKey(type)){
+            ArrayList<String> list = this.getExersicesFromType(type);
+            list.add(exercise);
+            this.exercises.put(type, list);
+            return true;
+        }
+        else{
+            return false;
+        }
+
     }
-    public void removeExercise(String exercise){
-        this.exercisesList.remove(exercise);
+
+    /**
+     * gets list of exercises from type given
+     * @param type String of type of exercise
+     */
+    public ArrayList<String> getExersicesFromType(String type){
+        return this.exercises.get(type);
     }
-    public ArrayList<String> getExersiseList(){
-        return this.exercisesList;
+    
+    /**
+     * gets list of types of exercises
+     */
+    public ArrayList<String> getTypeList(){
+        return new ArrayList<String>(this.exercises.keySet());
     }
 
     // store serialized exercise list for next session
@@ -50,9 +74,9 @@ public class Exercises implements Serializable{
         return exercises;
     }
 
-    public void testExercises(){
-        this.exercisesList.add("Push Ups");
-        this.exercisesList.add("Sit Ups");
-        this.exercisesList.add("Chin Ups");
+    public void testExercises2(){
+        this.exercises.put("Arms", new ArrayList<>(Arrays.asList("Push Ups", "Curls")));
+        this.exercises.put("Abs", new ArrayList<>(Arrays.asList("Sit Ups", "ab workouts")));
+        this.exercises.put("Legs", new ArrayList<>(Arrays.asList("Squats", "T-bags")));
     }
 }

@@ -75,6 +75,7 @@ public class initUI extends JFrame{
 
     public void updateDisplay(){
         setVisible(true);
+        revalidate();
         repaint();
     }
     
