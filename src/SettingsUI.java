@@ -19,25 +19,38 @@ public class SettingsUI extends JPanel implements ActionListener {
     private JTextField userName, userAge, userWeight, userHeight;
     private JButton editUserSubmit, backButton;
 
-
     public SettingsUI(initUI parentUI) {
         this.parentUI = parentUI;
 
         showSettings();
 
-
     }
 
     public void actionPerformed(ActionEvent e) {
+        System.out.print("SettingsUI: ");
+
         if (e.getSource() == editButton) {
+            System.out.println("Edit Button");
             remove(settingsPanel);
             showEditUser();
         }
         else if(e.getSource() == changeButton) {
+            System.out.println("Edit Button");
 
         }
         else if(e.getSource() == resetButton) {
+            System.out.println("Edit Button");
 
+        }
+        else if(e.getSource() == backButton) {
+            System.out.println("Back Button");
+            remove(editUserPanel);
+            showSettings();
+        }
+
+        //FIXME:
+        else if(e.getSource() == editUserSubmit) {
+            System.out.println("Submit Button");
         }
     }
 
@@ -70,14 +83,11 @@ public class SettingsUI extends JPanel implements ActionListener {
 
         this.updateFrame();
     }
-    
 
     public void showEditUser(){
-        //GridLayout layoutGrid = new GridLayout(0,10);
 
         editUserPanel = new JPanel();
 
-        //editUserPanel.setLayout(new BoxLayout(editUserPanel, BoxLayout.Y_AXIS));
         editUserPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 

@@ -51,6 +51,4 @@ public class User {
     public double getWeight() {
         return weight;
     }
-    
-
 }
