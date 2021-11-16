@@ -8,6 +8,8 @@ public class Exercises implements Serializable{
 
     public Exercises() {
         this.exercises = new HashMap<>();
+        this.testExercises2();
+
     }
 
     /**

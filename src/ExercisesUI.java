@@ -21,9 +21,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
         setLayout(new BorderLayout());
 
         //Gets exercises from the database
-        /*using test database until setup correctly*/
         exercisesList = new Exercises();
-        exercisesList.testExercises2();
 
         //Creates the drop down menu for the Types
         showTypes();
@@ -44,7 +42,6 @@ public class ExercisesUI extends JPanel implements ActionListener{
             //Check if details is already displaying
             if(detailsPanel != null){
                 if(detailsPanel.isShowing()){
-                    System.out.println("Removing detailsPanel");
                     remove(detailsPanel);
                 }
             }
@@ -52,7 +49,6 @@ public class ExercisesUI extends JPanel implements ActionListener{
             //Check if exercise list is already displaying
             if(listPanel != null){
                 if(listPanel.isShowing()){
-                    System.out.println("Removing List");
                     remove(listPanel);
                 }
             }
@@ -74,10 +70,16 @@ public class ExercisesUI extends JPanel implements ActionListener{
         
     }
 
+    /**
+     * refreshes display to update GUI
+     */
     public void updateFrame(){
         parentUI.updateDisplay();
     }
 
+    /**
+     * displays a drop down menu of the types of exercises
+     */
     public void showTypes(){
         //Create new panel to format layout
         typesPanel = new JPanel();
@@ -97,6 +99,10 @@ public class ExercisesUI extends JPanel implements ActionListener{
 
     }
 
+    /**
+     * displays a drop down menu of the exercises for a type
+     * @param type the type of exercise to display
+     */
     public void showExercises(String type){
         //Create new panel to format layout
         listPanel = new JPanel();
