@@ -14,16 +14,26 @@ MAINTEST = ass1
 
 .SUFFIXES : .class .java
 
+# compile all .java files in src/
 build: 
 	$(MKBIN)
 	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
 	$(JAVAC) $(JAVAC_FLAGS) *.java
 
+# clean the bin directory
 clean:
 	rm -rf $(TARGET)
 
+# just run the main class
 run:
 	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
 
+# compile and run the main class
+all:
+	$(MKBIN)
+	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
+	$(JAVAC) $(JAVAC_FLAGS) *.java
+	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
 
-.PHONY: build clean run
+
+.PHONY: build clean run all
