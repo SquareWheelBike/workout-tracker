@@ -10,7 +10,7 @@ MAINSRC = src/
 TARGET = bin
 
 MAIN = Workout
-MAINTEST = ass1
+MAINTEST = Test
 
 .SUFFIXES : .class .java
 
@@ -35,5 +35,9 @@ all:
 	$(JAVAC) $(JAVAC_FLAGS) *.java
 	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
 
+# run Test.java, meant for testing temporary stuff
+test:
+	$(JVM) $(JAVAC_CP) $(TARGET) $(MAINTEST)
 
-.PHONY: build clean run all
+
+.PHONY: build clean run all test

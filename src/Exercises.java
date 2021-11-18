@@ -9,7 +9,6 @@ public class Exercises implements Serializable{
     public Exercises() {
         this.exercises = new HashMap<>();
         this.testExercises2();
-
     }
 
     /**
@@ -80,5 +79,14 @@ public class Exercises implements Serializable{
         this.exercises.put("Arms", new ArrayList<>(Arrays.asList("Push Ups", "Curls")));
         this.exercises.put("Abs", new ArrayList<>(Arrays.asList("Sit Ups", "ab workouts")));
         this.exercises.put("Legs", new ArrayList<>(Arrays.asList("Squats", "T-bags")));
+    }
+
+    /**
+     * Takes in the processed strings from the csv file and adds them to the exercises list
+     */
+    public void importExercises(ArrayList<ArrayList<String>> csv){
+        for(ArrayList<String> line : csv){
+            //TODO (cole): import csv data structure here
+        }
     }
 }
