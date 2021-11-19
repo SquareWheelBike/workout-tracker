@@ -1,28 +1,32 @@
 package src;
 
-
+//import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
+
 import javax.swing.*;
 //import javax.swing.event.*;
 
 
 public class SettingsUI extends JPanel implements ActionListener {
     private initUI parentUI;
+    private ManageUser userManager;
 
-//    private JRadioButton Workout1, Workout2;
-//    private JLabel selectLabel;
+    //Main panel
+    private JPanel settingsPanel, newUserPanel, infoPanel, changePanel;
+    private JButton newUserButton, changeButton, resetButton;
 
-    private JButton editButton, changeButton, resetButton;
-    private JPanel settingsPanel, editUserPanel;
-
+    //sub panels
     private JTextField userName, userAge, userWeight, userHeight;
-    private JButton editUserSubmit, backButton;
+    private JButton backButton, submitUserButton;
+    private JComboBox<String> userOptionsBox;
 
     private User curUser;
 
-    public SettingsUI(initUI parentUI, User user) {
+    public SettingsUI(initUI parentUI, User user, ManageUser userManager) {
         this.parentUI = parentUI;
+        this.curUser = user;
+        this.userManager = userManager;
 
         showSettings();
 
@@ -30,15 +34,15 @@ public class SettingsUI extends JPanel implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         System.out.print("SettingsUI: ");
-
-        if (e.getSource() == editButton) {
-            System.out.println("Edit Button");
+        if (e.getSource() == newUserButton) {
+            System.out.println("New User Button");
             remove(settingsPanel);
-            showEditUser();
+            showNewUser();
         }
         else if(e.getSource() == changeButton) {
-            System.out.println("Edit Button");
-
+            System.out.println("Change Button");
+            remove(settingsPanel);
+            showChangeUser();
         }
         else if(e.getSource() == resetButton) {
             System.out.println("Edit Button");
@@ -46,40 +50,43 @@ public class SettingsUI extends JPanel implements ActionListener {
         }
         else if(e.getSource() == backButton) {
             System.out.println("Back Button");
-            remove(editUserPanel);
+            removeAll();
             showSettings();
         }
-
-        //FIXME:
-        else if(e.getSource() == editUserSubmit) {
-            System.out.println("Edit: Submit Button");
-            //curUser.setName(userName.getText());
-            //curUser.setAge(Integer.parseInt(userAge.getText()));
-            //curUser.setHeight(Double.parseDouble(userHeight.getText()));
-            //curUser.setWeight(Double.parseDouble(userWeight.getText()));
-            remove(editUserPanel);
-            showSettings();
+        else if(e.getSource() == submitUserButton) {
+            System.out.println("new User Submit");
+            User user = new User(userName.getText(), Integer.parseInt(userAge.getText()), Double.parseDouble(userWeight.getText()), Double.parseDouble(userHeight.getText()));
+            userManager.addUser(user);
+            userManager.saveUser();
+            userManager.saveLastUser(userName.getText());
+            parentUI.dispose();
+            new initUI();
         }
-    }
 
-    public void setExercise(String option){
-
+        //If user selected a exercise from a type
+        else if (e.getSource() == userOptionsBox) {
+            System.out.println("User Selected: " + userOptionsBox.getSelectedItem());
+            String s = (String) userOptionsBox.getSelectedItem();
+            userManager.saveUser();
+            userManager.saveLastUser(s);
+            parentUI.dispose();
+            new initUI();
+        }
     }
 
     public void showSettings(){
         settingsPanel = new JPanel();
-    
-        //Edit User button
-        editButton = new JButton ("Edit User");
-        editButton.addActionListener(this);
-        settingsPanel.add (editButton);
-        editButton.setBounds (25, 35, 210, 55);
-
         //Change User Button
         changeButton = new JButton ("Change User");
         changeButton.addActionListener(this);
         settingsPanel.add (changeButton);
         changeButton.setBounds (25, 110, 210, 55);
+
+        //Edit User button
+        newUserButton = new JButton ("New User");
+        newUserButton.addActionListener(this);
+        settingsPanel.add (newUserButton);
+        newUserButton.setBounds (25, 35, 210, 55);
 
         //Reset to Default Button
         resetButton = new JButton ("Reset To Default");
@@ -91,69 +98,104 @@ public class SettingsUI extends JPanel implements ActionListener {
 
         this.updateFrame();
     }
+    public void showNewUser(){
+        newUserPanel = new JPanel();
 
-    public void showEditUser(){
-
-        editUserPanel = new JPanel();
-
-        editUserPanel.setLayout(new GridBagLayout());
+        newUserPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         //Back Button
         backButton = new JButton ("Back");
         backButton.addActionListener(this);
         c = setGrid(c, 0, 0);
-        editUserPanel.add(backButton, c);
-
+        newUserPanel.add(backButton, c);
         //Add padding
         setGrid(c, 1, 1, 40);
-        editUserPanel.add(new JLabel(""), c);
+        newUserPanel.add(new JLabel(""), c);
+
+        setGrid(c, 2, 2, 40);
+        newUserPanel.add(this.showUserInfo(curUser), c);
+
+        //Submit Button
+        submitUserButton = new JButton ("Submit");
+        submitUserButton.addActionListener(this);
+        c = setGrid(c, 2, 7);
+        newUserPanel.add(submitUserButton, c);
+    
+        add(newUserPanel);
+    
+        this.updateFrame();
+    }
+    public void showChangeUser(){
+        changePanel = new JPanel();
+        changePanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        //Back Button
+        backButton = new JButton ("Back");
+        backButton.addActionListener(this);
+        c = setGrid(c, 0, 0);
+        changePanel.add(backButton, c);
+
+        //Add padding
+        setGrid(c, 1, 1, 20);
+        changePanel.add(new JLabel(""), c);
+        //Label
+        JLabel userLabel = new JLabel("Select a User:");
+        c = setGrid(c, 3, 2);
+        changePanel.add(userLabel, c);
+
+        //Create Drop box
+        userOptionsBox = new JComboBox<String>(userManager.getNames().toArray(new String[0]));
+        userOptionsBox.addActionListener(this);
+        c = setGrid(c, 3, 3);
+        changePanel.add(userOptionsBox, c);
+
+
+
+        add(changePanel);
+        updateFrame();
+    }
+    public JPanel showUserInfo(User user){
+        infoPanel = new JPanel();
+
+        infoPanel.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
 
         //User Name        
         c = setGrid(c, 1, 2);
-        editUserPanel.add(new JLabel("Name: "), c);
+        infoPanel.add(new JLabel("Name: "), c);
         userName = new JTextField (20);
         userName.addActionListener(this);
         c = setGrid(c, 2, 2);
-        editUserPanel.add(userName, c);
+        infoPanel.add(userName, c);
+        
 
         //Age
         c = setGrid(c, 1, 3);
-        editUserPanel.add(new JLabel("Age: "), c);
+        infoPanel.add(new JLabel("Age: "), c);
         userAge = new JTextField (5);
         userAge.addActionListener(this);
         c = setGrid(c, 2, 3);
-        editUserPanel.add(userAge, c);
+        infoPanel.add(userAge, c);
 
         //Height
         c = setGrid(c, 1, 4);
-        editUserPanel.add(new JLabel("Height: "), c);
+        infoPanel.add(new JLabel("Height: "), c);
         userHeight = new JTextField (5);
         userHeight.addActionListener(this);
         c = setGrid(c, 2, 4);
-        editUserPanel.add(userHeight, c);
+        infoPanel.add(userHeight, c);
 
         //Weight
         c = setGrid(c, 1, 5);
-        editUserPanel.add(new JLabel("Weight: "), c);
+        infoPanel.add(new JLabel("Weight: "), c);
         userWeight = new JTextField (5);
         userWeight.addActionListener(this);
         c = setGrid(c, 2, 5);
-        editUserPanel.add(userWeight, c);
+        infoPanel.add(userWeight, c);
 
-        //Add padding
-        setGrid(c, 1, 6, 20);
-        editUserPanel.add(new JLabel(""), c);
-
-        //Submit Button
-        editUserSubmit = new JButton ("Submit");
-        editUserSubmit.addActionListener(this);
-        c = setGrid(c, 2, 7);
-        editUserPanel.add(editUserSubmit, c);
-
-        add(editUserPanel);
-
-        this.updateFrame();
+        return infoPanel;
     }
 
     private GridBagConstraints setGrid(GridBagConstraints c, int gridX, int gridY, int ipady){
@@ -163,7 +205,6 @@ public class SettingsUI extends JPanel implements ActionListener {
         c.gridy = gridY;
         return c;
     }
-
     private GridBagConstraints setGrid(GridBagConstraints c, int gridX, int gridY){
         c.fill = GridBagConstraints.HORIZONTAL;
         c.ipady = 0;
@@ -171,8 +212,8 @@ public class SettingsUI extends JPanel implements ActionListener {
         c.gridy = gridY;
         return c;
     }
-
     public void updateFrame(){
         parentUI.updateDisplay();
     }
+
 }

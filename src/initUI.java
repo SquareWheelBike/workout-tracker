@@ -1,29 +1,61 @@
 package src;
 
 import java.awt.*;
+
 import javax.swing.*;
 
 public class initUI extends JFrame{
 
     private JPanel mainArea, taskBar;
     private JPanel exerciseUI, taskBarUI, homePageUI, workoutPageUI, scheduleUI, settingsUI;
-    private ManageUser userManger;
+    private ManageUser userManager;
     private User curUser;
 
     /**
      * Create Startup Screen and all default parameters.
      * Load HomePageUI and TaskBarUI by default
+     * Setup all other panels to be invisible, show appropriate panel when clicked
+     * Each menu item has a corresponding panel to show with class
      */
     public initUI(){
-        userManger = new ManageUser();
+        initUserData();                 //initialize last user data and userlist
+        initUIPages();                  //initialize all UI pages        
+        initJFrame();                   //initialize JFrame Window
+        initTaskBar();                  //initialize taskbar and displays homepage
+        updateDisplay();                //update display
+    }
+
+
+    public void updateDisplay(){
+        setVisible(true);
+        revalidate();
+        repaint();
+    }
+
+    public void closingEvent(){
+        //save user data
+        System.out.println("Save Last User: " + curUser.getName());
+
+        userManager.saveLastUser(curUser.getName());
+        userManager.saveUser();
+        System.out.println("Program is Closing");
+        System.exit(0);
+    }
+
+    /**
+     * Checks if User information is available, if not, create new user
+     * Waits till user is created till function returns
+     */
+    public void initUserData(){
+        userManager = new ManageUser();
         //If no user data is found, create a new user
-        if(userManger.loadUser() == false || userManger.loadLastUser() == null){
-            userManger.createUserUI();
+        if(userManager.loadUser() == false){
+            userManager.createUserUI();
         }
         //FIXME: maybe a better way to do this
         //Halt program until user is created
         while(curUser == null){
-            curUser = userManger.getUser(userManger.loadLastUser());
+            curUser = userManager.getUser(userManager.loadLastUser());
             try{
                 Thread.sleep(1000);
             }catch(InterruptedException e){
@@ -31,18 +63,22 @@ public class initUI extends JFrame{
             }
         }
         System.out.print("Current User: " + curUser);
-        
-        //Create all UI setions
+    }
+
+    public void initUIPages(){
         exerciseUI = new ExercisesUI(this);
         taskBarUI = new TaskBarUI(this);
-        homePageUI = new HomePageUI(this, curUser);
+        homePageUI = new HomePageUI(this, "Welcome Back " + curUser.getName() + "!");
         workoutPageUI = new WorkoutsUI(this);
         scheduleUI = new ScheduleUI(this);
-        settingsUI = new SettingsUI(this, curUser);
+        settingsUI = new SettingsUI(this, curUser, userManager);
 
-        //Set taskbar layout
-        setLayout(new BorderLayout()); 
+    }
 
+    /**
+     * Initialize and display the taskbar and homepage
+     */
+    public void initTaskBar(){
         //Setup main area default homepage
         mainArea = new JPanel();        
         mainArea.add(homePageUI);
@@ -52,6 +88,14 @@ public class initUI extends JFrame{
         taskBar = new JPanel();
         taskBar.add(taskBarUI);
         add(taskBar, BorderLayout.SOUTH); 
+    }
+    
+    /**
+     * Setup JFrame Size, title, and close operation
+     * Edit closingEvent() to change closing behavior
+     */
+    public void initJFrame(){
+        setLayout(new BorderLayout());  //Set taskbar layout
 
         //Set Jframe parameters
         setTitle("Workout");
@@ -66,7 +110,6 @@ public class initUI extends JFrame{
                 closingEvent();
             }
         });
-        setVisible(true);
     }
 
     /**
@@ -99,24 +142,4 @@ public class initUI extends JFrame{
         updateDisplay();
     } 
 
-    public void updateDisplay(){
-        setVisible(true);
-        revalidate();
-        repaint();
-    }
-    
-    public JPanel getExerciseUI(){
-        return this.exerciseUI;
-    }
-
-    public JPanel getTaskBarUI(){
-        return this.taskBarUI;
-    }
-
-    public void closingEvent(){
-        System.out.println("Save Last User: " + curUser.getName());
-        //userManger.saveLastUser(curUser.getName());
-        System.out.println("Program is Closing");
-        System.exit(0);
-    }
 }

@@ -12,7 +12,7 @@ public class Test {
         // prints out the exercise table
         ArrayList<ArrayList<String>> exerciseTable = CSVReader.readCSV("src/data/List.csv");
         System.out.println(exerciseTable);
-        Exercises exercises = new Exercises();
+        ManageExercise exercises = new ManageExercise();
         exercises.importExercises(exerciseTable);
         System.exit(0);
     }

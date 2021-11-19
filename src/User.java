@@ -3,6 +3,7 @@ package src;
 import java.io.Serializable;
 
 public class User implements Serializable{
+    //Info
     private String name;
     private double weight, height;
     private int age;
