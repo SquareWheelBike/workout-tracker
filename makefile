@@ -12,11 +12,7 @@ TARGET = bin
 MAIN = Workout
 MAINTEST = Test
 
-
-
 .SUFFIXES : .class .java
-
-
 
 # compile all .java files in src/
 build: 
@@ -43,11 +39,13 @@ all:
 test:
 	$(JVM) $(JAVAC_CP) $(TARGET) $(MAINTEST)
 
+# run the main class in src
 mat:
 	$(JAVAC) src/*.java
 	$(JAVAC) $(MAIN).java
 	$(JVM) $(MAIN)
 
+#delete the user data and compile files
 reset:
 	$(JAVAC) src/*.java
 	$(JAVAC) $(MAIN).java
