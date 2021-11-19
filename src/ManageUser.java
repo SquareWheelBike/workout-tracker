@@ -12,7 +12,7 @@ public class ManageUser extends JFrame implements ActionListener{
     private String lastUser;
 
     private JFrame frame;
-    private JButton editUserSubmit;
+    private JButton submitButton;
     private JTextField userName, userAge, userHeight, userWeight;
 
 
@@ -49,9 +49,11 @@ public class ManageUser extends JFrame implements ActionListener{
         System.out.println("Saving users to file...");
         //serialize user to file
         try{
+            //Check/Create if directory exists
             File dir = new File("data");
             dir.mkdirs();
-            File userFile = new File("src/data/", "users.ser");
+            //Create file
+            File userFile = new File("src/data/", "users.ser"); 
             if (userFile.createNewFile()) {
                 System.out.println("User File created: " + userFile.getName());
             } else {
@@ -62,7 +64,9 @@ public class ManageUser extends JFrame implements ActionListener{
             e.printStackTrace();
             return false;
         }
+
         try{
+            //Write user information to file
             FileOutputStream fos = new FileOutputStream("src/data/users.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.list);
@@ -84,6 +88,7 @@ public class ManageUser extends JFrame implements ActionListener{
         //deserialize user from file
         System.out.println("Loading users from file...");
         try{
+            //load user list from file
             FileInputStream fis = new FileInputStream("src/data/users.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
             //TODO: cast fix
@@ -110,12 +115,13 @@ public class ManageUser extends JFrame implements ActionListener{
         System.out.println("Saving last user to file...");
         //serialize user to file
         try{
+            //
             FileOutputStream fos = new FileOutputStream("src/data/lastUser.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(name);
             oos.close();
             fos.close();
-            System.out.println("Saved last user to file...");
+            System.out.println("Saved last user to file");
             return true;
         }catch(IOException e){
             e.printStackTrace();
@@ -125,7 +131,7 @@ public class ManageUser extends JFrame implements ActionListener{
 
     /**
      * Deserializes the last user name(string) to a file in data folder.
-     * @return true if successful, false otherwise
+     * @return User if successful, null otherwise
      */
     public String loadLastUser() {
         System.out.println("Loading last user from file...");
@@ -139,13 +145,16 @@ public class ManageUser extends JFrame implements ActionListener{
             System.out.println("Loaded last users from file");
             return lastUser;
         }catch(IOException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }catch(ClassNotFoundException e){
             e.printStackTrace();
         }
         return null;
     }
 
+    /**
+     * Displays UI for editing user information.
+     */
     public void createUserUI(){
 
         frame = new JFrame("Create User");
@@ -209,10 +218,10 @@ public class ManageUser extends JFrame implements ActionListener{
         frame.add(new JLabel(""), c);
 
         //Submit Button
-        editUserSubmit = new JButton ("Submit");
-        editUserSubmit.addActionListener(this);
+        submitButton = new JButton ("Submit");
+        submitButton.addActionListener(this);
         c = setGrid(c, 2, 11);
-        frame.add(editUserSubmit, c);
+        frame.add(submitButton, c);
 
         frame.setVisible(true);
     }
@@ -234,7 +243,7 @@ public class ManageUser extends JFrame implements ActionListener{
     }
 
     public void actionPerformed(ActionEvent e){
-        if(e.getSource() == editUserSubmit){
+        if(e.getSource() == submitButton){
             String name = userName.getText();
             int age = Integer.parseInt(userAge.getText());
             double height = Double.parseDouble(userHeight.getText());
@@ -245,6 +254,14 @@ public class ManageUser extends JFrame implements ActionListener{
             saveLastUser(name);
             frame.dispose();
         }
+    }
+
+    public ArrayList<String> getNames(){
+        ArrayList<String> names = new ArrayList<String>();
+        for(User user : this.getList()){
+            names.add((user.getName()));
+        }
+        return names;
     }
 
 }

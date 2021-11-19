@@ -12,7 +12,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
     private JComboBox<String> exersices, types;
     private JLabel selectExersice, selectType;
     private initUI parentUI;
-    private Exercises exercisesList;
+    private ManageExercise exercisesList;
     private JPanel typesPanel, listPanel, detailsPanel;
 
     public ExercisesUI(initUI parentUI) {
@@ -21,7 +21,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
         setLayout(new BorderLayout());
 
         //Gets exercises from the database
-        exercisesList = new Exercises();
+        exercisesList = new ManageExercise();
 
         //Creates the drop down menu for the Types
         showTypes();
