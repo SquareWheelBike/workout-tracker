@@ -19,7 +19,9 @@ public class SettingsUI extends JPanel implements ActionListener {
     private JTextField userName, userAge, userWeight, userHeight;
     private JButton editUserSubmit, backButton;
 
-    public SettingsUI(initUI parentUI) {
+    private User curUser;
+
+    public SettingsUI(initUI parentUI, User user) {
         this.parentUI = parentUI;
 
         showSettings();
@@ -50,7 +52,13 @@ public class SettingsUI extends JPanel implements ActionListener {
 
         //FIXME:
         else if(e.getSource() == editUserSubmit) {
-            System.out.println("Submit Button");
+            System.out.println("Edit: Submit Button");
+            //curUser.setName(userName.getText());
+            //curUser.setAge(Integer.parseInt(userAge.getText()));
+            //curUser.setHeight(Double.parseDouble(userHeight.getText()));
+            //curUser.setWeight(Double.parseDouble(userWeight.getText()));
+            remove(editUserPanel);
+            showSettings();
         }
     }
 

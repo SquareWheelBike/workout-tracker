@@ -12,13 +12,20 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 public class HomePageUI extends JPanel {
-    
+
+    private initUI parentUI;
     private JLabel welcomeLabel, logoPic, creators;
     private String userName;
     private BufferedImage logoPicture;
 
-    public HomePageUI() {
-        userName = "{Name Goes Here}";
+    public HomePageUI(initUI parentUI, User user) {
+        userName = "NULL";
+        if(user != null) {
+            userName = user.getName();
+        }
+        else{
+            System.out.print("Current User is null");
+        }
         setLayout(new BorderLayout(0,10));
 
         //construct components

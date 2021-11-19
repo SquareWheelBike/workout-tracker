@@ -7,19 +7,38 @@ public class initUI extends JFrame{
 
     private JPanel mainArea, taskBar;
     private JPanel exerciseUI, taskBarUI, homePageUI, workoutPageUI, scheduleUI, settingsUI;
+    private ManageUser userManger;
+    private User curUser;
 
     /**
      * Create Startup Screen and all default parameters.
      * Load HomePageUI and TaskBarUI by default
      */
     public initUI(){
+        userManger = new ManageUser();
+        //If no user data is found, create a new user
+        if(userManger.loadUser() == false || userManger.loadLastUser() == null){
+            userManger.createUserUI();
+        }
+        //FIXME: maybe a better way to do this
+        //Halt program until user is created
+        while(curUser == null){
+            curUser = userManger.getUser(userManger.loadLastUser());
+            try{
+                Thread.sleep(1000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
+        }
+        System.out.print("Current User: " + curUser);
+        
         //Create all UI setions
         exerciseUI = new ExercisesUI(this);
         taskBarUI = new TaskBarUI(this);
-        homePageUI = new HomePageUI();
+        homePageUI = new HomePageUI(this, curUser);
         workoutPageUI = new WorkoutsUI(this);
         scheduleUI = new ScheduleUI(this);
-        settingsUI = new SettingsUI(this);
+        settingsUI = new SettingsUI(this, curUser);
 
         //Set taskbar layout
         setLayout(new BorderLayout()); 
@@ -39,7 +58,14 @@ public class initUI extends JFrame{
         setResizable(false);
         setAlwaysOnTop(true);
         setSize(600, 600);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        //Add a listener when the window is closed
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent e) {
+                closingEvent();
+            }
+        });
         setVisible(true);
     }
 
@@ -85,5 +111,12 @@ public class initUI extends JFrame{
 
     public JPanel getTaskBarUI(){
         return this.taskBarUI;
+    }
+
+    public void closingEvent(){
+        System.out.println("Save Last User: " + curUser.getName());
+        //userManger.saveLastUser(curUser.getName());
+        System.out.println("Program is Closing");
+        System.exit(0);
     }
 }

@@ -1,11 +1,14 @@
 package src;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable{
     private String name;
     private double weight, height;
     private int age;
 
     public User(String name, int age, double height, double weight) {
+        super();
         this.name = name;
         this.age = age;
         this.height = height;
@@ -50,5 +53,10 @@ public class User {
 
     public double getWeight() {
         return weight;
+    }
+
+    @Override
+    public String toString() {
+        return "User [name=" + name + ", age=" + age + ", height=" + height + ", weight=" + weight + "]";
     }
 }
