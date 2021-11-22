@@ -3,7 +3,7 @@ JVM = java
 JAVADOC = javadoc
 MKBIN = mkdir -p bin
 
-JAVAC_FLAGS = -g -d 'bin/'
+JAVAC_FLAGS = -Xlint -g -d 'bin/'
 JAVAC_CP = -cp
 
 MAINSRC = src/
@@ -21,8 +21,10 @@ build:
 	$(JAVAC) $(JAVAC_FLAGS) *.java
 
 # clean the bin directory
+# remove any serialized data
 clean:
 	rm -rf $(TARGET)
+	find . -name "*.ser" -type f -delete	
 
 # just run the main class
 run:

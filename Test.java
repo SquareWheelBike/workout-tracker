@@ -10,7 +10,7 @@ public class Test {
         // this imports all csv files into the database
         // adds them into an exercise table
         // prints out the exercise table
-        ArrayList<ArrayList<String>> exerciseTable = CSVReader.readCSV("src/data/List.csv");
+        ArrayList<ArrayList<String>> exerciseTable = CSVReader.readCSV("newList.csv", "data/");
         System.out.println(exerciseTable);
         ManageExercise exercises = new ManageExercise();
         exercises.importExercises(exerciseTable);
