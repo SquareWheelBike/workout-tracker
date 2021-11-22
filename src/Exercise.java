@@ -19,11 +19,11 @@ public class Exercise {
     private BufferedImage image;
     private Image scaledImage;
     private String imageName;
-    private static  String imagePath = "src/data/images/";
+    private static String imagePath = "src/data/images/";
     
-    private static int currentid = 1;
+    private static int currentid = 0;
 
-    public Exercise(String type, String name, String description, int reps, String extra1Name, int extra1Val, String extra2Name, int extra2Val, String imageName) {
+    public Exercise(String type, String name, String imageName, String extra1Name, String extra2Name, String description) {
         this.type = type;
         this.name = name;
         this.description = description;
@@ -44,16 +44,16 @@ public class Exercise {
         this.imageName = imageName;
         id = ++currentid;
     }
-    public Exercise(String type, String name, String extra1Name, int extra1Val, String extra2Name, int extra2Val, String imageName) {
-        this(type, name, null, 0, extra1Name, extra1Val, extra2Name, extra2Val, imageName);
+
+    public Exercise(String type, String name, String imageName, String extra1Name, String extra2Name) {
+        this(type, name, imageName, extra1Name, extra2Name, null);
     }
-    public Exercise(String type, String name, String extra1Name, int extra1Val, String imageName) {
-        this(type, name, extra1Name, extra1Val, null, 0, imageName);
+    public Exercise(String type, String name, String imageName, String extra1Name ) {
+        this(type, name, imageName, extra1Name, null);
     }
     public Exercise(String type, String name, String imageName) {
-        this(type, name, null, 0, imageName);
+        this(type, name, imageName, null);
     }
-
 
     public String getType() {
         return this.type;
