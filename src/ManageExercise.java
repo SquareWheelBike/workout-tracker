@@ -7,7 +7,7 @@ public class ManageExercise implements Serializable{
     
     //private HashMap<String, ArrayList<String>> exercises;
     private ArrayList<Exercise> exerciseList;
-    private ArrayList<ArrayList<String>> csv;
+    private ArrayList<String[]> csv;
     private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ManageExercise() {
@@ -122,16 +122,16 @@ public class ManageExercise implements Serializable{
     /**
      * Takes in the processed strings from the csv file and adds them to the exercises list
      */
-    public void importExercises(ArrayList<ArrayList<String>> csv){
-        for(ArrayList<String> line : csv){
-            if(line.size() == 4){
-                exerciseList.add(new Exercise(line.get(1), line.get(2), line.get(3)));
+    public void importExercises(ArrayList<String[]> csv){
+        for(String[] line : csv){
+            if(line.length == 4){
+                exerciseList.add(new Exercise(line[1], line[2], line[3]));
             }
-            else if(line.size() == 5){
-                exerciseList.add(new Exercise(line.get(1), line.get(2), line.get(3), line.get(4)));
+            else if(line.length == 5){
+                exerciseList.add(new Exercise(line[1], line[2], line[3], line[4]));
             }
-            else if(line.size() == 6){
-                exerciseList.add(new Exercise(line.get(1), line.get(2), line.get(3), line.get(4), line.get(5)));
+            else if(line.length == 6){
+                exerciseList.add(new Exercise(line[1], line[2], line[3], line[4], line[5]));
             }
         }
     }
