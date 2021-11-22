@@ -4,6 +4,7 @@ JAVADOC = javadoc
 MKBIN = mkdir -p bin
 
 JAVAC_FLAGS = -Xlint -g -d 'bin/'
+MAT_FLAGS = -Xlint -g
 JAVAC_CP = -cp
 
 MAINSRC = src/
@@ -43,8 +44,8 @@ test:
 
 # run the main class in src
 mat:
-	$(JAVAC) src/*.java
-	$(JAVAC) $(MAIN).java
+	$(JAVAC) $(MAT_FLAGS) src/*.java
+	$(JAVAC) $(MAT_FLAGS) $(MAIN).java
 	$(JVM) $(MAIN)
 
 #delete the user data and compile files
