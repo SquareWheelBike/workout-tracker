@@ -63,7 +63,7 @@ public class initUI extends JFrame{
                 e.printStackTrace();
             }
         }
-        System.out.print("Current User: " + curUser);
+        System.out.println("Current User: " + curUser);
     }
 
     public void initUIPages(){
