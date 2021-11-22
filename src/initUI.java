@@ -7,6 +7,7 @@ import javax.swing.*;
 public class initUI extends JFrame{
 
     private JPanel mainArea, taskBar;
+    private ManageExercise exercisesManager;
     private JPanel exerciseUI, taskBarUI, homePageUI, workoutPageUI, scheduleUI, settingsUI;
     private ManageUser userManager;
     private User curUser;
@@ -17,7 +18,7 @@ public class initUI extends JFrame{
      * Setup all other panels to be invisible, show appropriate panel when clicked
      * Each menu item has a corresponding panel to show with class
      */
-    public initUI(){
+    public initUI(){               
         initUserData();                 //initialize last user data and userlist
         initUIPages();                  //initialize all UI pages        
         initJFrame();                   //initialize JFrame Window
@@ -66,10 +67,11 @@ public class initUI extends JFrame{
     }
 
     public void initUIPages(){
-        exerciseUI = new ExercisesUI(this);
+        exercisesManager = new ManageExercise();
+        exerciseUI = new ExercisesUI(this, exercisesManager);
         taskBarUI = new TaskBarUI(this);
         homePageUI = new HomePageUI(this, "Welcome Back " + curUser.getName() + "!");
-        workoutPageUI = new WorkoutsUI(this);
+        workoutPageUI = new WorkoutsUI(this, exercisesManager);
         scheduleUI = new ScheduleUI(this);
         settingsUI = new SettingsUI(this, curUser, userManager);
 
@@ -141,5 +143,6 @@ public class initUI extends JFrame{
         setVisible(true);
         updateDisplay();
     } 
+
 
 }

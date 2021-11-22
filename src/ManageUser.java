@@ -156,7 +156,7 @@ public class ManageUser extends JFrame implements ActionListener{
      * Displays UI for editing user information.
      */
     public void createUserUI(){
-
+        FormateGUI gui = new FormateGUI();
         frame = new JFrame("Create User");
         frame.setTitle("Create User");
         frame.setResizable(false);
@@ -168,78 +168,62 @@ public class ManageUser extends JFrame implements ActionListener{
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        c = setGrid(c, 2, 0);
+        c = gui.setGrid(c, 2, 0);
         frame.add(new JLabel("Welcome to our Workout Tracker Program"), c);
-        c = setGrid(c, 2, 1);
+        c = gui.setGrid(c, 2, 1);
         frame.add(new JLabel("Please enter your information below"), c);
         
         //Add padding
-        setGrid(c, 1, 2, 40);
+        gui.setGrid(c, 1, 2, 40);
         frame.add(new JLabel(""), c);
 
         //User Name        
-        c = setGrid(c, 1, 5);
+        c = gui.setGrid(c, 1, 5);
         frame.add(new JLabel("Name: "), c);
         userName = new JTextField (20);
         userName.addActionListener(this);
-        c = setGrid(c, 2, 5);
+        c = gui.setGrid(c, 2, 5);
         frame.add(userName, c);
 
         //Age
-        c = setGrid(c, 1, 6);
+        c = gui.setGrid(c, 1, 6);
         frame.add(new JLabel("Age: "), c);
         userAge = new JTextField (5);
         userAge.addActionListener(this);
-        c = setGrid(c, 2, 6);
+        c = gui.setGrid(c, 2, 6);
         frame.add(userAge, c);
 
         //Height
-        c = setGrid(c, 1, 7);
+        c = gui.setGrid(c, 1, 7);
         frame.add(new JLabel("Height: "), c);
         userHeight = new JTextField (5);
         userHeight.addActionListener(this);
-        c = setGrid(c, 2, 7);
+        c = gui.setGrid(c, 2, 7);
         frame.add(userHeight, c);
-        c = setGrid(c, 3, 7);
+        c = gui.setGrid(c, 3, 7);
         frame.add(new JLabel("inches"), c);
 
         //Weight
-        c = setGrid(c, 1, 8);
+        c = gui.setGrid(c, 1, 8);
         frame.add(new JLabel("Weight: "), c);
         userWeight = new JTextField (5);
         userWeight.addActionListener(this);
-        c = setGrid(c, 2, 8);
+        c = gui.setGrid(c, 2, 8);
         frame.add(userWeight, c);
-        c = setGrid(c, 3, 8);
+        c = gui.setGrid(c, 3, 8);
         frame.add(new JLabel("kg"), c);
 
         //Add padding
-        setGrid(c, 1, 10, 20);
+        gui.setGrid(c, 1, 10, 20);
         frame.add(new JLabel(""), c);
 
         //Submit Button
         submitButton = new JButton ("Submit");
         submitButton.addActionListener(this);
-        c = setGrid(c, 2, 11);
+        c = gui.setGrid(c, 2, 11);
         frame.add(submitButton, c);
 
         frame.setVisible(true);
-    }
-
-    private GridBagConstraints setGrid(GridBagConstraints c, int gridX, int gridY, int ipady){
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = ipady;
-        c.gridx = gridX;
-        c.gridy = gridY;
-        return c;
-    }
-
-    private GridBagConstraints setGrid(GridBagConstraints c, int gridX, int gridY){
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.ipady = 0;
-        c.gridx = gridX;
-        c.gridy = gridY;
-        return c;
     }
 
     public void actionPerformed(ActionEvent e){

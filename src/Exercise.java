@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.*;
+
 import javax.imageio.ImageIO;
 
 public class Exercise {
@@ -27,11 +29,11 @@ public class Exercise {
         this.type = type;
         this.name = name;
         this.description = description;
-        this.reps = reps;
+        this.reps = 0;
         this.extra1Name = extra1Name;
         this.extra2Name = extra2Name;
-        this.extra1Val = extra1Val;
-        this.extra2Val = extra2Val;
+        this.extra1Val = 0;
+        this.extra2Val = 0;
         try{
             this.image = ImageIO.read(new File(imagePath + imageName));
             this.scaledImage = image.getScaledInstance(400, 400, Image.SCALE_SMOOTH);
@@ -54,50 +56,46 @@ public class Exercise {
     public Exercise(String type, String name, String imageName) {
         this(type, name, imageName, null);
     }
+    public Exercise(int id, String type, String name, String imageName) {
+        this(type, name, imageName);
+        this.id = id;
+    }
+    
 
     public String getType() {
         return this.type;
     }
-
     public String getName() {
         return this.name;
     }
-
     public String getDescription() {
         return this.description;
     }
-
-    public int getReps() {
+    public Integer getReps() {
         return this.reps;
     }
-
-    public int getId() {
-        return this.id;
+    public Integer getID() {
+        return Integer.valueOf(this.id);
     }
-
     public String getExtra1Name() {
         return this.extra1Name;
     }
-
     public String getExtra2Name() {
         return this.extra2Name;
     }
-
     public double getExtra1Val() {
         return this.extra1Val;
     }
-
     public double getExtra2Val() {
         return this.extra2Val;
     }
-    
     public Image getScaledImage() {
         return this.scaledImage;
     }
-
     public String getImageName() {
         return this.imageName;
     }
+
     public void setType(String type) {
         this.type = type;
     }
@@ -110,7 +108,7 @@ public class Exercise {
     public void setReps(int reps) {
         this.reps = reps;
     }
-    public void setId(int id) {
+    public void setID(int id) {
         this.id = id;
     }
     public void setExtra1Name(String extra1Name) {

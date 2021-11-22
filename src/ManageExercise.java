@@ -9,9 +9,8 @@ public class ManageExercise implements Serializable{
     private ArrayList<Exercise> exerciseList;
 
     public ManageExercise() {
-        this.exerciseList = new ArrayList<>();
-        this.testExercises2();
-        //load exercises from file
+        this.exerciseList = new ArrayList<Exercise>();
+        testExercises2();
     }
 
  
@@ -33,6 +32,20 @@ public class ManageExercise implements Serializable{
         }
 
     }*/
+
+    /**
+     * gets the Exercise of exercise by id
+     * @param type
+     * @return
+     */
+    public Exercise getExerciseByID(Integer ID){
+        for(Exercise e: exerciseList){
+            if(e.getID() == ID){
+                return e;
+            }
+        }
+        return null;
+    }
 
     
     /**
@@ -93,11 +106,11 @@ public class ManageExercise implements Serializable{
     }
 
     public void testExercises2(){
-        exerciseList.add(new Exercise("Legs", "Squat", "Squat.png"));
-        exerciseList.add(new Exercise("Legs", "Lunges", "Lunge.png"));
+        exerciseList.add(new Exercise(1, "Legs", "Squat", "Squat.png"));
+        exerciseList.add(new Exercise(3, "Legs", "Lunges", "Lunge.png"));
         exerciseList.add(new Exercise("Legs", "Deadlift", "Deadl.png"));
-        exerciseList.add(new Exercise("Abs", "Situps", "Situp.png"));
-        exerciseList.add(new Exercise("Abs", "Plank", "Plank.png"));
+        exerciseList.add(new Exercise(19, "Abs", "Situps", "Situp.png"));
+        exerciseList.add(new Exercise(20, "Abs", "Plank", "Plank.png"));
         exerciseList.add(new Exercise("Arms", "Bicep Curl", "Bicep.png"));
         exerciseList.add(new Exercise("Arms", "Hammer Curl", "Hamme.png"));
     }
@@ -111,4 +124,5 @@ public class ManageExercise implements Serializable{
             //Should we do a new version like the one on the excel sheet page 2?
         }
     }
+
 }

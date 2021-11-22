@@ -8,21 +8,18 @@ import javax.swing.*;
 //import javax.swing.event.*;
 
 public class ExercisesUI extends JPanel implements ActionListener{
+    private initUI parentUI;
+    private ManageExercise exercisesManager;
 
     private JComboBox<String> exersices, types;
     private JLabel selectExersice, selectType;
-    private initUI parentUI;
-    private ManageExercise exercisesList;
     private JPanel typesPanel, listPanel, detailsPanel;
 
-    public ExercisesUI(initUI parentUI) {
+    public ExercisesUI(initUI parentUI, ManageExercise exercisesManager) {
         this.parentUI = parentUI;
+        this.exercisesManager = exercisesManager;
 
         setLayout(new BorderLayout());
-
-        //Gets exercises from the database
-        exercisesList = new ManageExercise();
-
         //Creates the drop down menu for the Types
         showTypes();
     }
@@ -89,7 +86,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
         typesPanel.add(selectType, BorderLayout.NORTH);
         
         //Create Drop box
-        types = new JComboBox<String>(exercisesList.getTypeList().toArray(new String[0]));
+        types = new JComboBox<String>(exercisesManager.getTypeList().toArray(new String[0]));
         types.addActionListener(this);
         typesPanel.add(types, BorderLayout.NORTH);
 
@@ -112,7 +109,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
         listPanel.add(selectExersice, BorderLayout.CENTER);
 
         //Create Drop box
-        exersices = new JComboBox<String>(exercisesList.getExersicesFromType(type).toArray(new String[0]));
+        exersices = new JComboBox<String>(exercisesManager.getExersicesFromType(type).toArray(new String[0]));
         exersices.addActionListener(this);
         listPanel.add(exersices);
 
