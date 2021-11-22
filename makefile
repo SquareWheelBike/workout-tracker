@@ -49,9 +49,8 @@ mat:
 	$(JVM) $(MAIN)
 
 #delete the user data and compile files
-reset:
-	$(JAVAC) src/*.java
-	$(JAVAC) $(MAIN).java
-	$(JVM) $(MAIN)
+reset:	
+	find . -name "*.ser" -type f -delete
+	find . -name "*.class" -type f -delete
 
 .PHONY: build clean run all test
