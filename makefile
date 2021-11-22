@@ -15,53 +15,41 @@ MAINTEST = Test
 
 .SUFFIXES : .class .java
 
-# OLD STUFF, COMPILES INTO BIN
 # compile all .java files in src/
-#build: 
-#	$(MKBIN)
-#	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
-#	$(JAVAC) $(JAVAC_FLAGS) *.java
-#
-## clean the bin directory
-## remove any serialized data
-#clean:
-#	rm -rf $(TARGET)
-#	find . -name "*.ser" -type f -delete	
-#
-## just run the main class
-#run:
-#	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
-#
-## compile and run the main class
-#all:
-#	$(MKBIN)
-#	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
-#	$(JAVAC) $(JAVAC_FLAGS) *.java
-#	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
-#
-## run Test.java, meant for testing temporary stuff
-#test:
-#	$(JVM) $(JAVAC_CP) $(TARGET) $(MAINTEST)
+build: 
+	$(MKBIN)
+	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
+	$(JAVAC) $(JAVAC_FLAGS) *.java
 
-build:
-	$(JAVAC) $(MAT_FLAGS) src/*.java
-	$(JAVAC) $(MAT_FLAGS) *.java
+# clean the bin directory
+# remove any serialized data
+clean:
+	rm -rf bin
+	rm src/data/*.ser
 
+# just run the main class
 run:
-	$(JVM) $(MAIN)
+	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
 
-# run the main class in src
+# compile and run the main class
 all:
-	make build
-	make run
+	$(MKBIN)
+	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
+	$(JAVAC) $(JAVAC_FLAGS) *.java
+	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
 
-#delete the user data and compile files
-clean:	
-	find . -name "*.ser" -type f -delete
-	find . -name "*.class" -type f -delete
-	
 # run Test.java, meant for testing temporary stuff
 test:
-	$(JVM) $(MAINTEST)
+	$(JVM) $(JAVAC_CP) $(TARGET) $(MAINTEST)
 
-.PHONY: build clean run all test
+# run the main class in src
+mat:
+	$(JAVAC) $(MAT_FLAGS) src/*.java
+	$(JAVAC) $(MAT_FLAGS) *.java
+	$(JVM) $(MAIN)
+
+reset:
+	rm src/*.class
+	rm src/data/*.ser
+
+.PHONY: build clean run all test mat reset
