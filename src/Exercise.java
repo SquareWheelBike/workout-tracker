@@ -19,7 +19,7 @@ public class Exercise {
 
     //Image
     private BufferedImage image;
-    private Image scaledImage;
+    //private Image scaledImage;
     private String imageName;
     private static String imagePath = "src/data/images/";
     
@@ -36,7 +36,7 @@ public class Exercise {
         this.extra2Val = 0;
         try{
             this.image = ImageIO.read(new File(imagePath + imageName));
-            this.scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+            //this.scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
             //logoPic = new JLabel(new ImageIcon(scaledlogo));
             //add(logoPic, BorderLayout.CENTER);
         }catch (IOException e){
@@ -90,7 +90,11 @@ public class Exercise {
         return this.extra2Val;
     }
     public Image getScaledImage() {
-        return this.scaledImage;
+        //this.scaledImage = image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+        return image.getScaledInstance(250, 250, Image.SCALE_SMOOTH);
+    }
+    public BufferedImage getImage() {
+        return this.image;
     }
     public String getImageName() {
         return this.imageName;

@@ -170,38 +170,56 @@ public class WorkoutsUI extends JPanel implements ActionListener {
 
     public void displayExercise(Exercise exercise){
         //display exercise
-        FormateGUI gui = new FormateGUI();
-        GridBagConstraints c = new GridBagConstraints();
         
         //Add exercise name
         exercisesPanel = new JPanel();
-        exercisesPanel.setLayout(new GridLayout(10,10));
-        
-        //Add padding
-        gui.setGrid(c, 0, 0, 100);
-        exercisesPanel.add(new JLabel("PENIS"), c);  
+        exercisesPanel.setLayout(new BorderLayout(0,10));
 
-        c = gui.setGrid(c, 0, 1);
-        exercisesPanel.add(new JLabel(exercise.getName(),  SwingConstants.CENTER), c);
+        exercisesPanel.add(new JLabel(exercise.getName(),  SwingConstants.CENTER), BorderLayout.NORTH);
         
         
-        c = gui.setGrid(c, 0, 2, 300);
         JLabel exercisePic = new JLabel(new ImageIcon(exercise.getScaledImage()));
-        exercisesPanel.add(exercisePic, c);
-
+        exercisesPanel.add(exercisePic, BorderLayout.CENTER);
         
 
     
 
 
         //TODO: display image of exercise
-        //c = gui.setGrid(c, 1, 2);
-        //exercisPanel.add(new JLabel (exercise.getImage()),c);
 
-        c = gui.setGrid(c, 0, 3);
-        exercisesPanel.add(new JLabel ("Reps:"),c);
-        c = gui.setGrid(c, 1, 3);
-        exercisesPanel.add(new JTextArea(1,10),c);
+        //c = gui.setGrid(c, 0, 3);
+        JPanel dataPanel = new JPanel();
+        dataPanel.setLayout(new GridLayout(3, 2, 0, 10));
+        dataPanel.add(new JLabel ("Reps:"));
+        dataPanel.add(new JTextArea(1,10));
+
+        if(exercise.getExtra1Name() != null){
+            dataPanel.add(new JLabel (exercise.getExtra1Name()));
+            dataPanel.add(new JTextArea(1,10));
+        }
+        else if(exercise.getExtra2Name() != null){
+            dataPanel.add(new JLabel (exercise.getExtra2Name()));
+            dataPanel.add(new JTextArea(1,10));
+        }
+
+        //add buttons
+        JButton submit = new JButton("Submit");
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Submit");
+            }
+        });
+        dataPanel.add(submit);
+
+
+        
+        dataPanel.setVisible(true);
+        dataPanel.revalidate();
+        dataPanel.repaint();
+
+        exercisesPanel.add(dataPanel, BorderLayout.SOUTH);
+
 
         exercisesPanel.setVisible(true);
         exercisesPanel.revalidate();
