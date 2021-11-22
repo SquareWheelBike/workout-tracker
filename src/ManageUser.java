@@ -14,6 +14,7 @@ public class ManageUser extends JFrame implements ActionListener{
     private JFrame frame;
     private JButton submitButton;
     private JTextField userName, userAge, userHeight, userWeight;
+    private static final long serialVersionUID = 1L; // VERSION NUMBER
 
 
     public ManageUser() {
@@ -84,6 +85,7 @@ public class ManageUser extends JFrame implements ActionListener{
      * Deserializes the user object to a file in data folder.
      * @return true if successful, false otherwise
      */
+    @SuppressWarnings("unchecked") // get rid of unchecked warning
     public boolean loadUser() {
         //deserialize user from file
         System.out.println("Loading users from file...");
@@ -91,7 +93,7 @@ public class ManageUser extends JFrame implements ActionListener{
             //load user list from file
             FileInputStream fis = new FileInputStream("src/data/users.ser");
             ObjectInputStream ois = new ObjectInputStream(fis);
-            //TODO: cast fix
+            // WARNING: this is an unchecked cast, but it can be fixed later if it needs to be
             this.list = (ArrayList<User>) ois.readObject();
             ois.close();
             fis.close();

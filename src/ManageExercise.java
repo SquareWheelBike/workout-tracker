@@ -8,6 +8,7 @@ public class ManageExercise implements Serializable{
     //private HashMap<String, ArrayList<String>> exercises;
     private ArrayList<Exercise> exerciseList;
     private ArrayList<ArrayList<String>> csv;
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ManageExercise() {
         this.exerciseList = new ArrayList<Exercise>();

@@ -14,6 +14,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
     private JComboBox<String> exersices, types;
     private JLabel selectExersice, selectType;
     private JPanel typesPanel, listPanel, detailsPanel;
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ExercisesUI(initUI parentUI, ManageExercise exercisesManager) {
         this.parentUI = parentUI;

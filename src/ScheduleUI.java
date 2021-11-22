@@ -16,6 +16,7 @@ public class ScheduleUI extends JPanel implements ActionListener {
     private JRadioButton Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
     private JLabel selectLabel;
     private JTextArea jcomp4;
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ScheduleUI(initUI parentUI) {
         this.parentUI = parentUI;

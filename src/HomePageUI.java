@@ -16,6 +16,7 @@ public class HomePageUI extends JPanel {
     //private initUI parentUI;
     private JLabel welcomeLabel, logoPic, creators;
     private BufferedImage logoPicture;
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public HomePageUI(initUI parentUI, String message) {
         setLayout(new BorderLayout(0,10));

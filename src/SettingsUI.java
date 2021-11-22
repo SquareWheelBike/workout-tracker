@@ -9,6 +9,7 @@ import javax.swing.*;
 
 
 public class SettingsUI extends JPanel implements ActionListener {
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
     private initUI parentUI;
     private ManageUser userManager;
 

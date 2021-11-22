@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 
 
 public class WorkoutsUI extends JPanel implements ActionListener {
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
     private initUI parentUI;
     private ManageExercise exercisesManager;
 
@@ -84,7 +85,8 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         //Workout2.setBounds (20, 100, 100, 25);
         //jcomp4.setBounds (150, 75, 350, 350);
     }
-
+    
+    @SuppressWarnings("unchecked")
     public void actionPerformed(ActionEvent e) {
         System.out.print("WorkoutUI: ");
         //System.out.println("Action Event: " + e.getSource());

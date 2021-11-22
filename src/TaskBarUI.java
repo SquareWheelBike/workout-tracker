@@ -6,6 +6,7 @@ import javax.swing.*;
 //import javax.swing.event.*;
 
 public class TaskBarUI extends JPanel implements ActionListener {
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
     private JButton workouts;
     private JButton schedule;
     private JButton settings;

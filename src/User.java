@@ -3,6 +3,7 @@ package src;
 import java.io.Serializable;
 
 public class User implements Serializable{
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
     //Info
     private String name;
     private double weight, height;
