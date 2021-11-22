@@ -1,24 +1,24 @@
-Legs,Squat,1,Squat.png,Barbell
-Legs,Squat,2,Squat.png,Bodyweight
-Legs,Lunges,3,Lunge.png,Barbell
-Legs,Lunges,4,Lunge.png,Bodyweight
-Legs,Lunges,5,Lunge.png,Dumbell
-Legs,Deadlift,6,Deadl.png,Barbell
-Legs,Glute Bridge,7,Glute.png,Barbell
-Cardio,Box Jumps,8,Box J.png,
-Cardio,Cycling,9,Cycli.png,
-Cardio,Treadmill,10,Tread.png,
-Cardio,Jump Rope,11,Jump .png,
-Chest,Bench Press,12,Bench.png,Barbell
-Chest,Bench Press,13,Bench.png,Dumbell
-Chest,Overhead Press,14,Overh.png,
-Chest,Pushup,15,Pushu.png,
-Back,Pullup,16,Pullu.png,
-Back,Weighted,17,Weigh.png,
-Back,Rows,18,Rows.png,
-Abs,Situps,19,Situp.png,
-Abs,Plank,20,Plank.png,
-Arms,Bicep Curl,21,Bicep.png,
-Arms,Hammer Curl,22,Hamme.png,
-Arms,Tricep Kickbacks,23,Trice.png,
-Arms,Tricep Pushdown,24,Trice.png,
+1,Legs,Squat,Squat.png,Barbell,
+2,Legs,Squat,Squat.png,Bodyweight,
+3,Legs,Lunges,Lunge.png,Barbell,
+4,Legs,Lunges,Lunge.png,Bodyweight,
+5,Legs,Lunges,Lunge.png,Dumbell,
+6,Legs,Deadlift,Deadl.png,Barbell,
+7,Legs,Glute Bridge,Glute.png,Barbell,
+8,Cardio,Box Jumps,BoxJu.png,,
+9,Cardio,Cycling,Cycli.png,,
+10,Cardio,Treadmill,Tread.png,,
+11,Cardio,Jump Rope,Jump.png,,
+12,Chest,Bench Press,Bench.png,Barbell,
+13,Chest,Bench Press,Bench.png,Dumbell,
+14,Chest,Overhead Press,Overh.png,,
+15,Chest,Pushup,Pushu.png,,
+16,Back,Pullup,Pullu.png,,
+17,Back,Weighted,Weigh.png,,
+18,Back,Rows,Rows.png,,
+19,Abs,Situps,Situp.png,,
+20,Abs,Plank,Plank.png,,
+21,Arms,Bicep Curl,Bicep.png,,
+22,Arms,Hammer Curl,Hamme.png,,
+23,Arms,Tricep Kickbacks,Trice.png,,
+24,Arms,Tricep Pushdown,Trice.png,,

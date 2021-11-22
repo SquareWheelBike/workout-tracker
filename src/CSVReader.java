@@ -5,11 +5,11 @@ import java.io.*;
 
 public class CSVReader {
     // import a CSV file as an ArrayList of ArrayLists
-    public static ArrayList<ArrayList<String>> readCSV(String fileName) {
+    public static ArrayList<ArrayList<String>> readCSV(String fileName, String path) {
         ArrayList<ArrayList<String>> csv = new ArrayList<ArrayList<String>>();
         try {
             // open the file
-            FileInputStream fis = new FileInputStream(fileName);
+            FileInputStream fis = new FileInputStream(path + fileName);
             InputStreamReader isr = new InputStreamReader(fis);
             BufferedReader br = new BufferedReader(isr);
             String line;
