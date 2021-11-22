@@ -53,4 +53,4 @@ reset:
 	find . -name "*.ser" -type f -delete
 	find . -name "*.class" -type f -delete
 
-.PHONY: build clean run all test
+.PHONY: build clean run all test mat reset
