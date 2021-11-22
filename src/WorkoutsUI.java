@@ -4,6 +4,7 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 //import javax.swing.event.*;
 
 
@@ -22,11 +23,17 @@ public class WorkoutsUI extends JPanel implements ActionListener {
     private JPanel subPanel, exercisesPanel;; 
     private JComboBox<String> exersices;
 
+    private GridBagConstraints c;
+    private FormateGUI gui;
+
 
     private ArrayList<Exercise> listInWorkout;
     
 
     public WorkoutsUI(initUI parentUI, ManageExercise exercisesManager) {
+        c = new GridBagConstraints();
+        gui = new FormateGUI();
+
         this.parentUI = parentUI;
         this.exercisesManager = exercisesManager;
         this.workoutsMap = new HashMap<String, ArrayList<Integer>>();
@@ -61,7 +68,7 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         initSubPanel(subPanel, null);
         subPanel.setBounds (150, 75, 350, 350);
         
-        subPanel.add(exercisesPanel);
+        subPanel.add(exercisesPanel, BorderLayout.CENTER);
         add(subPanel);
         //add (jcomp4);
 
@@ -96,10 +103,10 @@ public class WorkoutsUI extends JPanel implements ActionListener {
             for(Exercise o: listInWorkout){
                 
                 if(o.getName().equals(exerciseName)){
-                    System.out.print("Found: " + o.getName());
+                    System.out.println("Found: " + o.getName());
                     subPanel.remove(exercisesPanel);
                     displayExercise(o);
-                    subPanel.add(exercisesPanel);
+                    subPanel.add(exercisesPanel,BorderLayout.CENTER);
                     subPanel.revalidate();
                     subPanel.repaint();
                     updateFrame();
@@ -135,12 +142,11 @@ public class WorkoutsUI extends JPanel implements ActionListener {
      * displays a drop down menu of the types of exercises and displays the exercises for the selected
      */
     public void initSubPanel(JPanel subPanel, String workoutName){
-        FormateGUI gui = new FormateGUI();
-        GridBagConstraints c = new GridBagConstraints();
+        
 
-        subPanel.setLayout(new GridLayout(10,10));
+        subPanel.setLayout(new BorderLayout(0, 0));
         subPanel.removeAll();
-        subPanel.setBackground(Color.white);
+        //subPanel.setBackground(Color.white);
 
         exersices = new JComboBox<String>();
         
@@ -153,10 +159,10 @@ public class WorkoutsUI extends JPanel implements ActionListener {
             }
             exersices.addActionListener(this);
 
-            c = gui.setGrid(c, 2, 2);
-            subPanel.add(exersices, c);
+            subPanel.add(exersices, BorderLayout.NORTH);
         }
         
+        subPanel.setVisible(true);
         subPanel.revalidate();
         subPanel.repaint();
         
@@ -171,12 +177,20 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         exercisesPanel = new JPanel();
         exercisesPanel.setLayout(new GridLayout(10,10));
         
-        c = gui.setGrid(c, 1, 1);
-        exercisesPanel.add(new JLabel(exercise.getName()),c);
-        
         //Add padding
-        gui.setGrid(c, 2, 2, 40);
-        exercisesPanel.add(new JLabel(""), c);  
+        gui.setGrid(c, 0, 0, 100);
+        exercisesPanel.add(new JLabel("PENIS"), c);  
+
+        c = gui.setGrid(c, 0, 1);
+        exercisesPanel.add(new JLabel(exercise.getName(),  SwingConstants.CENTER), c);
+        
+        
+        c = gui.setGrid(c, 0, 2, 300);
+        JLabel exercisePic = new JLabel(new ImageIcon(exercise.getScaledImage()));
+        exercisesPanel.add(exercisePic, c);
+
+        
+
     
 
 
@@ -184,11 +198,12 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         //c = gui.setGrid(c, 1, 2);
         //exercisPanel.add(new JLabel (exercise.getImage()),c);
 
-        c = gui.setGrid(c, 3, 3);
+        c = gui.setGrid(c, 0, 3);
         exercisesPanel.add(new JLabel ("Reps:"),c);
-        c = gui.setGrid(c, 4, 5);
+        c = gui.setGrid(c, 1, 3);
         exercisesPanel.add(new JTextArea(1,10),c);
 
+        exercisesPanel.setVisible(true);
         exercisesPanel.revalidate();
         exercisesPanel.repaint();
 

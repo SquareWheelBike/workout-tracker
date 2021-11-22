@@ -12,7 +12,7 @@ public class ManageExercise implements Serializable{
     public ManageExercise() {
         this.exerciseList = new ArrayList<Exercise>();
         //testExercises2();
-        this.csv = new ArrayList<ArrayList<String>>();
+        this.csv = CSVReader.readCSV("newList.csv", "src/data/");
         importExercises(csv);
     }
 
@@ -122,7 +122,6 @@ public class ManageExercise implements Serializable{
      * Takes in the processed strings from the csv file and adds them to the exercises list
      */
     public void importExercises(ArrayList<ArrayList<String>> csv){
-        csv = CSVReader.readCSV("newList.csv", "src/data/");
         for(ArrayList<String> line : csv){
             if(line.size() == 4){
                 exerciseList.add(new Exercise(line.get(1), line.get(2), line.get(3)));
@@ -133,8 +132,6 @@ public class ManageExercise implements Serializable{
             else if(line.size() == 6){
                 exerciseList.add(new Exercise(line.get(1), line.get(2), line.get(3), line.get(4), line.get(5)));
             }
-            //TODO (cole): import csv data structure here
-            //Should we do a new version like the one on the excel sheet page 2?
         }
     }
 
