@@ -14,7 +14,7 @@ public class ManageUser extends JFrame implements ActionListener{
     private JFrame frame;
     private JButton submitButton;
     private JTextField userName, userAge, userHeight, userWeight;
-    private static final long serialVersionUID = 1L; // VERSION NUMBER
+    private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
 
     public ManageUser() {
@@ -49,10 +49,12 @@ public class ManageUser extends JFrame implements ActionListener{
     public boolean saveUser() {
         System.out.println("Saving users to file...");
         //serialize user to file
+        /* NOTE (cole): this whole block is redundant, the try-catch block below takes care of it already
         try{
             //Check/Create if directory exists
-            File dir = new File("data");
-            dir.mkdirs();
+            // NOTE (cole): this is redundant, dir already exists with pictures in it or program will fail
+            //File dir = new File("data");
+            //dir.mkdirs();
             //Create file
             File userFile = new File("src/data/", "users.ser"); 
             if (userFile.createNewFile()) {
@@ -65,27 +67,30 @@ public class ManageUser extends JFrame implements ActionListener{
             e.printStackTrace();
             return false;
         }
+        */
 
         try{
             //Write user information to file
+            // FileOutputStream will create file if not exist, or truncate existing file
             FileOutputStream fos = new FileOutputStream("src/data/users.ser");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(this.list);
             oos.close();
             fos.close();
-            System.out.println("Saved users to file");
-            return true;
+            System.out.println("Saved users' data to file");
         }catch(IOException e){
+            System.out.println("An error occurred creating a user file");
             e.printStackTrace();
+            return false;
         }
-        return false;
+        return true;
     }
 
     /**
      * Deserializes the user object to a file in data folder.
      * @return true if successful, false otherwise
      */
-    @SuppressWarnings("unchecked") // get rid of unchecked warning
+    @SuppressWarnings("unchecked") // get rid of unchecked cast warning, we know what we're doing
     public boolean loadUser() {
         //deserialize user from file
         System.out.println("Loading users from file...");
