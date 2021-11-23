@@ -178,15 +178,7 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         exercisesPanel = new JPanel();
         exercisesPanel.setLayout(new BorderLayout(0,10));
     
-        
-//        //Add padding
-//        gui.setGrid(c, 0, 0, 100);
-//        exercisesPanel.add(new JLabel(""), c);  
-
-        //c = gui.setGrid(c, 0, 1);
         exercisesPanel.add(new JLabel(exercise.getName(),  SwingConstants.CENTER), BorderLayout.NORTH);
-        
-        
 
         Image scaledImage = exercise.getScaledImage().getScaledInstance(125, 125, Image.SCALE_SMOOTH);
         JLabel exercisePic = new JLabel(new ImageIcon(scaledImage));
