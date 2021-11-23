@@ -10,9 +10,9 @@ public class Test {
         // this imports all csv files into the database
         // adds them into an exercise table
         // prints out the exercise table
-        ArrayList<String[]> exerciseTable = CSVReader.readCSV("newList.csv", "src/data/");
-        for (String[] row : exerciseTable) {
-            System.out.println(row.length + " " + Arrays.toString(row));
+        List<List<String>> exerciseTable = CSVReader.readCSV("newList.csv", "src/data/");
+        for (List<String> row : exerciseTable) {
+            System.out.println(row.size() + " " + row);
         }
         System.exit(0);
     }

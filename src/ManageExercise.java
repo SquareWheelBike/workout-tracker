@@ -6,14 +6,14 @@ import java.io.*;
 public class ManageExercise implements Serializable{
     
     //private HashMap<String, ArrayList<String>> exercises;
-    private ArrayList<Exercise> exerciseList;
-    private ArrayList<String[]> csv;
+    private List<Exercise> exerciseList;
+    private List<List<String>> csv;
     private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ManageExercise() {
         this.exerciseList = new ArrayList<Exercise>();
         //testExercises2();
-        this.csv = CSVReader.readCSV("newList.csv", "src/data/");
+        this.csv = CSVReader.readCSV("List.csv", "src/data/");
         importExercises(csv);
     }
 
@@ -122,19 +122,43 @@ public class ManageExercise implements Serializable{
     /**
      * Takes in the processed strings from the csv file and adds them to the exercises list
      */
-    public void importExercises(ArrayList<String[]> csv){
+    public void importExercises(List<List<String>> csv){
         // NOTE: any optional entries MUST go at the end columns of the CSV file (ie extras)
 
-        List<String> header = Arrays.asList(csv.remove(0)); // remove header from csv, store in its own reference as a list
+        List<String> header = csv.remove(0); // remove header from csv, store in its own reference as a list
         HashMap<String, Integer> headerMap = new HashMap<>(); // create a map of the header entries to their index in the array
         for (String s : header) {
             headerMap.put(s.toLowerCase(), header.indexOf(s.toString()));
         }
 
-        for (String[] line : csv) {
+        for (List<String> line : csv) {
             // create a new exercise object with the data from the csv line
             // since this constructor just fills blank fields with null, we can just use the default constructor mapped to knows header entries
-            Exercise e = new Exercise(Integer.parseInt(line[headerMap.get("id")]), line[headerMap.get("type")], line[headerMap.get("name")], line[headerMap.get("imagename")], line[headerMap.get("extra1name")], line[headerMap.get("extra2name")], line[headerMap.get("description")]);
+            int eid;
+            if (headerMap.get("id") == null) {
+                eid = -1;
+            } else {
+                eid = Integer.parseInt(line.get(headerMap.get("id")));
+            }
+            String extra1;
+            if (headerMap.get("extra1") == null || headerMap.get("extra1") >= line.size()) {
+                extra1 = null;
+            } else {
+                extra1 = line.get(headerMap.get("extra1"));
+            }
+            String extra2;
+            if (headerMap.get("extra2") == null || headerMap.get("extra2") >= line.size()) {
+                extra2 = null;
+            } else {
+                extra2 = line.get(headerMap.get("extra2"));
+            }
+            String description;
+            if (headerMap.get("description") == null || headerMap.get("description") >= line.size()) {
+                description = null;
+            } else {
+                description = line.get(headerMap.get("description"));
+            }
+            Exercise e = new Exercise(eid, line.get(headerMap.get("type")), line.get(headerMap.get("name")), line.get(headerMap.get("imagename")), extra1, extra2, description);
             // add the exercise to the list
             this.exerciseList.add(e);
         }
