@@ -1,35 +1,25 @@
-Legs,
-Squat,Barbell
-Squat,Bodyweight
-Lunges,Barbell
-Lunges,Bodyweight
-Lunges,Dumbell
-Deadlift,Barbell
-Glute Bridge ,Barbell
-,
-Legs/Cardio,
-Box Jumps,
-Cycling ,
-Treadmill,
-Jump Rope,
-,
-Chest,
-Bench Press,Barbell
-Bench Press,Dumbell
-Overhead Press,
-Pushup ,
-,
-Back ,
-Pullup,
-Pullup,Weighted
-Rows,
-,
-Abs,
-Situps,
-Plank,
-,
-Arms,
-Bicep Curl,
-Hammer Curl,
-Tricep Kickbacks,
-Tricep Pushdown,
+ID,Type,Name,ImageName,Extra1,Extra2
+1,Legs,Squat,Squat.png,Barbell,
+2,Legs,Squat,Squat.png,Bodyweight,
+3,Legs,Lunges,Lunge.png,Barbell,
+4,Legs,Lunges,Lunge.png,Bodyweight,
+5,Legs,Lunges,Lunge.png,Dumbell,
+6,Legs,Deadlift,Deadl.png,Barbell,
+7,Legs,Glute Bridge,Glute.png,Barbell,
+8,Cardio,Box Jumps,Box J.png,,
+9,Cardio,Cycling,Cycli.png,,
+10,Cardio,Treadmill,Tread.png,,
+11,Cardio,Jump Rope,Jump .png,,
+12,Chest,Bench Press,Bench.png,Barbell,
+13,Chest,Bench Press,Bench.png,Dumbell,
+14,Chest,Overhead Press,Overh.png,,
+15,Chest,Pushup,Pushu.png,,
+16,Back,Pullup,Pullu.png,,
+17,Back,Weighted,Weigh.png,,
+18,Back,Rows,Rows.png,,
+19,Abs,Situps,Situp.png,,
+20,Abs,Plank,Plank.png,,
+21,Arms,Bicep Curl,Bicep.png,,
+22,Arms,Hammer Curl,Hamme.png,,
+23,Arms,Tricep Kickbacks,Trice.png,,
+24,Arms,Tricep Pushdown,Trice.png,,

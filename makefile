@@ -19,7 +19,7 @@ MAINTEST = Test
 build: 
 	$(MKBIN)
 	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
-	$(JAVAC) $(JAVAC_FLAGS) *.java
+	$(JAVAC) $(JAVAC_FLAGS) $(MAIN).java
 
 # clean the bin directory
 # remove any serialized data
@@ -35,11 +35,13 @@ run:
 all:
 	$(MKBIN)
 	$(JAVAC) $(JAVAC_FLAGS) $(MAINSRC)*.java
-	$(JAVAC) $(JAVAC_FLAGS) *.java
+	$(JAVAC) $(JAVAC_FLAGS) $(MAIN).java
 	$(JVM) $(JAVAC_CP) $(TARGET) $(MAIN)
 
 # run Test.java, meant for testing temporary stuff
 test:
+	make build
+	$(JAVAC) $(JAVAC_FLAGS) $(MAINTEST).java
 	$(JVM) $(JAVAC_CP) $(TARGET) $(MAINTEST)
 
 # run the main class in src

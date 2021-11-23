@@ -25,7 +25,7 @@ public class Exercise {
     
     private static int currentid = 0;
 
-    public Exercise(String type, String name, String imageName, String extra1Name, String extra2Name, String description) {
+    public Exercise(int ID, String type, String name, String imageName, String extra1Name, String extra2Name, String description) {
         this.type = type;
         this.name = name;
         this.description = description;
@@ -44,11 +44,17 @@ public class Exercise {
             System.out.println("Error Reading Picture");
         }
         this.imageName = imageName;
-        id = ++currentid;
+        if (ID == -1) {
+            this.id = currentid;
+            currentid++;
+        } else {
+            this.id = ID;
+            currentid = ID + 1;
+        }
     }
 
     public Exercise(String type, String name, String imageName, String extra1Name, String extra2Name) {
-        this(type, name, imageName, extra1Name, extra2Name, null);
+        this(-1, type, name, imageName, extra1Name, extra2Name, null);
     }
     public Exercise(String type, String name, String imageName, String extra1Name ) {
         this(type, name, imageName, extra1Name, null);

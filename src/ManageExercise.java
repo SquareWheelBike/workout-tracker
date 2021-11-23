@@ -123,17 +123,20 @@ public class ManageExercise implements Serializable{
      * Takes in the processed strings from the csv file and adds them to the exercises list
      */
     public void importExercises(ArrayList<String[]> csv){
-        for(String[] line : csv){
-            if(line.length == 4){
-                exerciseList.add(new Exercise(line[1], line[2], line[3]));
-            }
-            else if(line.length == 5){
-                exerciseList.add(new Exercise(line[1], line[2], line[3], line[4]));
-            }
-            else if(line.length == 6){
-                exerciseList.add(new Exercise(line[1], line[2], line[3], line[4], line[5]));
-            }
+        // NOTE: any optional entries MUST go at the end columns of the CSV file (ie extras)
+        
+        List<String> header = Arrays.asList(csv.remove(0)); // remove header from csv, store in its own reference as a list
+        HashMap<String, Integer> headerMap = new HashMap<>(); // create a map of the header entries to their index in the array
+        for (String s : header) {
+            headerMap.put(s.toLowerCase(), header.indexOf(s.toString()));
         }
+
+        for (String[] line : csv) {
+            // create a new exercise object with the data from the csv line
+            // since this constructor just fills blank fields with null, we can just use the default constructor mapped to knows header entries
+            Exercise e = new Exercise(Integer.parseInt(line[headerMap.get("id")]), line[headerMap.get("type")], line[headerMap.get("name")], line[headerMap.get("imagename")], line[headerMap.get("extra1name")], line[headerMap.get("extra2name")], line[headerMap.get("description")]);
+        }
+
     }
 
 }

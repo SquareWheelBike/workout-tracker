@@ -10,10 +10,10 @@ public class Test {
         // this imports all csv files into the database
         // adds them into an exercise table
         // prints out the exercise table
-        ArrayList<String[]> exerciseTable = CSVReader.readCSV("newList.csv", "data/");
-        System.out.println(exerciseTable);
-        ManageExercise exercises = new ManageExercise();
-        exercises.importExercises(exerciseTable);
+        ArrayList<String[]> exerciseTable = CSVReader.readCSV("newList.csv", "src/data/");
+        for (String[] row : exerciseTable) {
+            System.out.println(row.length + " " + Arrays.toString(row));
+        }
         System.exit(0);
     }
 }
