@@ -71,7 +71,7 @@ public class ManageExercise implements Serializable{
     }
 
     public Exercise getExerciseByName(String name){
-        ArrayList<Exercise> list = new ArrayList<>();
+        // ArrayList<Exercise> list = new ArrayList<>();
         for(Exercise e : this.exerciseList){
             if(e.getName().equals(name)){
                 return e;
