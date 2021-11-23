@@ -6,8 +6,8 @@ import java.io.*;
 public class ManageExercise implements Serializable{
     
     //private HashMap<String, ArrayList<String>> exercises;
-    private List<Exercise> exerciseList;
-    private List<List<String>> csv;
+    private ArrayList<Exercise> exerciseList;
+    private ArrayList<ArrayList<String>> csv;
     private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ManageExercise() {
@@ -51,6 +51,10 @@ public class ManageExercise implements Serializable{
         return null;
     }
 
+    public ArrayList<Exercise> getExerciseList(){
+        return this.exerciseList;
+    }
+
     
     /**
      * gets list of exercises from type given
@@ -65,6 +69,17 @@ public class ManageExercise implements Serializable{
         }
         return nameList;
     }
+
+    public Exercise getExerciseByName(String name){
+        ArrayList<Exercise> list = new ArrayList<>();
+        for(Exercise e : this.exerciseList){
+            if(e.getName().equals(name)){
+                return e;
+            }
+        }
+        return null;
+    }
+    
     
     /**
      * gets list of types of exercises
@@ -122,16 +137,16 @@ public class ManageExercise implements Serializable{
     /**
      * Takes in the processed strings from the csv file and adds them to the exercises list
      */
-    public void importExercises(List<List<String>> csv){
+    public void importExercises(ArrayList<ArrayList<String>> csv){
         // NOTE: any optional entries MUST go at the end columns of the CSV file (ie extras)
 
-        List<String> header = csv.remove(0); // remove header from csv, store in its own reference as a list
+        ArrayList<String> header = csv.remove(0); // remove header from csv, store in its own reference as a list
         HashMap<String, Integer> headerMap = new HashMap<>(); // create a map of the header entries to their index in the array
         for (String s : header) {
             headerMap.put(s.toLowerCase(), header.indexOf(s.toString()));
         }
 
-        for (List<String> line : csv) {
+        for (ArrayList<String> line : csv) {
             // create a new exercise object with the data from the csv line
             // since this constructor just fills blank fields with null, we can just use the default constructor mapped to knows header entries
             int eid;

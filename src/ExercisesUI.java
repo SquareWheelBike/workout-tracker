@@ -2,7 +2,7 @@ package src;
 
 import java.awt.*;
 import java.awt.event.*;
-//import java.util.ArrayList;
+import java.util.*;
 
 import javax.swing.*;
 //import javax.swing.event.*;
@@ -125,8 +125,14 @@ public class ExercisesUI extends JPanel implements ActionListener{
         }
         //Create new panel to format layout
         detailsPanel = new JPanel();
-        
-        detailsPanel.add(new JLabel(String.format("Selected Exercise: %s", exercise)));
+
+        // find exercise from set of exercises
+        Exercise e = exercisesManager.getExerciseByName(exercise);
+
+        JLabel img = new JLabel(new ImageIcon(e.getScaledImage()));
+        add(img, BorderLayout.CENTER);
+
+        detailsPanel.add(new JLabel(String.format("Selected Exercise: %s", e.getName())));
 
         //Add panel to the ExercisesUI Panel
         add(detailsPanel, BorderLayout.SOUTH);

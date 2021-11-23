@@ -5,8 +5,8 @@ import java.io.*;
 
 public class CSVReader {
     // import a CSV file as an ArrayList of ArrayLists
-    public static List<List<String>> readCSV(String fileName, String path) {
-        List<List<String>> csv = new ArrayList<>();
+    public static ArrayList<ArrayList<String>> readCSV(String fileName, String path) {
+        ArrayList<ArrayList<String>> csv = new ArrayList<>();
         try {
             // open the file
             FileInputStream fis = new FileInputStream(path + fileName);
@@ -16,7 +16,13 @@ public class CSVReader {
             // read each line
             while ((line = br.readLine()) != null) {
                 // split the line into an array
-                csv.add(Arrays.asList(line.split(",")));
+                ArrayList<String> row = new ArrayList<>();
+                // add each element to the row
+                for (String element : line.split(",")) {
+                    row.add(element);
+                }
+                // add the row to the csv
+                csv.add(row);
             }
             // close the file
             br.close();

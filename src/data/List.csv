@@ -1,6 +1,6 @@
 ID,Type,Name,ImageName,Extra1,Extra2
-1,Legs,Squat,Squat.png,Barbell,
-2,Legs,Squat,Squat.png,Bodyweight,
+1,Legs,Squat,Squat1.jpg,Barbell,
+2,Legs,Squat,Squat2.jpg,Bodyweight,
 3,Legs,Lunges,Lunge.png,Barbell,
 4,Legs,Lunges,Lunge.png,Bodyweight,
 5,Legs,Lunges,Lunge.png,Dumbell,

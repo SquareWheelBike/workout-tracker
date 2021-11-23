@@ -72,7 +72,11 @@ public class Exercise {
         return this.type;
     }
     public String getName() {
-        return this.name;
+        String n = this.name;
+        if (this.extra1Name != null) {
+            n += " (" + this.extra1Name + ")";
+        }
+        return n;
     }
     public String getDescription() {
         return this.description;
