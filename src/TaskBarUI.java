@@ -20,18 +20,18 @@ public class TaskBarUI extends JPanel implements ActionListener {
         // construct components
         exercise = new JButton("Exersices");
         workouts = new JButton("Workouts");
-        schedule = new JButton("Schedule");
+        //schedule = new JButton("Schedule");
         settings = new JButton("Settings");
 
         exercise.addActionListener(this);
-        schedule.addActionListener(this);
+        //schedule.addActionListener(this);
         settings.addActionListener(this);
         workouts.addActionListener(this);
 
         // add components
         add(exercise);
         add(workouts);
-        add(schedule);
+        //add(schedule);
         add(settings);
     }
 

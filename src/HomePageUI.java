@@ -35,7 +35,7 @@ public class HomePageUI extends JPanel {
             System.out.println("Error Reading Picture");
         }
 
-        welcomeLabel = new JLabel (message + "!",  SwingConstants.CENTER);
+        welcomeLabel = new JLabel (message,  SwingConstants.CENTER);
         add (welcomeLabel, BorderLayout.PAGE_START);
 
         creators =  new JLabel ("Created by: Liam, Cole, and Mathew", SwingConstants.CENTER);

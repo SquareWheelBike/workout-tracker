@@ -18,10 +18,9 @@ public class WorkoutsUI extends JPanel implements ActionListener {
 
     private ArrayList<JRadioButton> buttonsList;
     private JLabel selectLabel;
-    private JTextArea jcomp4;
 
     private Map<String, ArrayList<Integer>> workoutsMap;
-    private JPanel subPanel, exercisesPanel;; 
+    private JPanel subPanel, exercisesPanel, descPanel; 
     private JComboBox<String> exersices;
 
     private GridBagConstraints c;
@@ -67,7 +66,7 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         subPanel = new JPanel();
         exercisesPanel = new JPanel();
         initSubPanel(subPanel, null);
-        subPanel.setBounds (150, 75, 350, 350);
+        subPanel.setBounds (125, 60, 400, 450);
         
         subPanel.add(exercisesPanel, BorderLayout.CENTER);
         add(subPanel);
@@ -172,38 +171,63 @@ public class WorkoutsUI extends JPanel implements ActionListener {
 
     public void displayExercise(Exercise exercise){
         //display exercise
-        FormateGUI gui = new FormateGUI();
-        GridBagConstraints c = new GridBagConstraints();
+        gui = new FormateGUI();
+        c = new GridBagConstraints();
         
         //Add exercise name
         exercisesPanel = new JPanel();
-        exercisesPanel.setLayout(new GridLayout(10,10));
-        
-        //Add padding
-        gui.setGrid(c, 0, 0, 100);
-        exercisesPanel.add(new JLabel("PENIS"), c);  
-
-        c = gui.setGrid(c, 0, 1);
-        exercisesPanel.add(new JLabel(exercise.getName(),  SwingConstants.CENTER), c);
-        
-        
-        c = gui.setGrid(c, 0, 2, 300);
-        JLabel exercisePic = new JLabel(new ImageIcon(exercise.getScaledImage()));
-        exercisesPanel.add(exercisePic, c);
-
-        
-
+        exercisesPanel.setLayout(new BorderLayout(0,10));
     
+        
+//        //Add padding
+//        gui.setGrid(c, 0, 0, 100);
+//        exercisesPanel.add(new JLabel(""), c);  
 
+        //c = gui.setGrid(c, 0, 1);
+        exercisesPanel.add(new JLabel(exercise.getName(),  SwingConstants.CENTER), BorderLayout.NORTH);
+        
+        
 
-        //TODO: display image of exercise
-        //c = gui.setGrid(c, 1, 2);
-        //exercisPanel.add(new JLabel (exercise.getImage()),c);
+        Image scaledImage = exercise.getScaledImage().getScaledInstance(125, 125, Image.SCALE_SMOOTH);
+        JLabel exercisePic = new JLabel(new ImageIcon(scaledImage));
+        exercisesPanel.add(exercisePic, BorderLayout.CENTER);
 
-        c = gui.setGrid(c, 0, 3);
-        exercisesPanel.add(new JLabel ("Reps:"),c);
+        //c = gui.setGrid(c, 0, 3);
+        descPanel = new JPanel();
+        descPanel.setLayout(new GridLayout(10,10));
+        descPanel.add(new JLabel ("Reps:"),c);
         c = gui.setGrid(c, 1, 3);
-        exercisesPanel.add(new JTextArea(1,10),c);
+        descPanel.add(new JTextArea(1,10),c);
+        
+        if(exercise.getExtra1Name() != null){
+            c = gui.setGrid(c, 0, 4);
+            descPanel.add(new JLabel (exercise.getExtra1Name()),c);
+            c = gui.setGrid(c, 1, 4);
+            descPanel.add(new JTextArea(1,10),c);
+        }
+        else if(exercise.getExtra2Name() != null){
+            c = gui.setGrid(c, 0, 5);
+            descPanel.add(new JLabel (exercise.getExtra2Name()),c);
+            c = gui.setGrid(c, 1, 5);
+            descPanel.add(new JTextArea(1,10),c);
+        }
+
+        JButton submit = new JButton("Submit");
+        //TODO: create a way to save the workout
+        submit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Submit");
+            }
+        });
+        c = gui.setGrid(c, 1, 6);
+        descPanel.add(submit, c);
+
+        descPanel.setVisible(true);
+        descPanel.revalidate();
+        descPanel.repaint();
+
+        exercisesPanel.add(descPanel, BorderLayout.SOUTH);
 
         exercisesPanel.setVisible(true);
         exercisesPanel.revalidate();
