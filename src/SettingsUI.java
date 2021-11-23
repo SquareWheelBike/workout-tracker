@@ -19,7 +19,7 @@ public class SettingsUI extends JPanel implements ActionListener {
 
     //sub panels
     private JTextField userName, userAge, userWeight, userHeight;
-    private JButton backButton, submitUserButton;
+    private JButton backButton, submitUserButton, confirmButton;
     private JComboBox<String> userOptionsBox;
 
     private User curUser;
@@ -46,13 +46,20 @@ public class SettingsUI extends JPanel implements ActionListener {
             showChangeUser();
         }
         else if(e.getSource() == resetButton) {
-            System.out.println("Edit Button");
-
+            System.out.println("Reset Button");
+            remove(settingsPanel);
+            showReset();
         }
         else if(e.getSource() == backButton) {
             System.out.println("Back Button");
             removeAll();
             showSettings();
+        }
+        else if(e.getSource() == confirmButton) {
+            System.out.println("Reseting....");
+            reset();
+            parentUI.dispose();
+            new initUI();
         }
         else if(e.getSource() == submitUserButton) {
             System.out.println("new User Submit");
@@ -74,7 +81,33 @@ public class SettingsUI extends JPanel implements ActionListener {
             new initUI();
         }
     }
+    public void reset(){
 
+    }
+
+    public void showReset(){
+
+
+        JPanel resetPanel = new JPanel();
+        resetPanel.setLayout(new BorderLayout());
+
+        resetPanel.add(new JLabel("Are you sure you want to delete all information?"), BorderLayout.PAGE_START);
+
+        confirmButton = new JButton("Yes");
+        confirmButton.addActionListener(this);
+        resetPanel.add(confirmButton, BorderLayout.WEST);
+
+        backButton = new JButton("No");
+        backButton.addActionListener(this);
+        resetPanel.add(backButton, BorderLayout.EAST);
+
+        resetPanel.setVisible(true);
+        resetPanel.revalidate();
+        resetPanel.repaint();
+
+        add(resetPanel);
+        updateFrame();
+    }
     public void showSettings(){
         settingsPanel = new JPanel();
         //Change User Button
