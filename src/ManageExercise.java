@@ -5,37 +5,15 @@ import java.io.*;
 
 public class ManageExercise implements Serializable{
     
-    //private HashMap<String, ArrayList<String>> exercises;
     private ArrayList<Exercise> exerciseList;
     private ArrayList<ArrayList<String>> csv;
     private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
 
     public ManageExercise() {
         this.exerciseList = new ArrayList<Exercise>();
-        //testExercises2();
         this.csv = CSVReader.readCSV("List.csv", "src/data/");
         importExercises(csv);
     }
-
- 
-    /**
-     * adds new exercise to list if type exist, if type does not exist, return false
-     * @param type String of type of exercise
-     * @param exercise string of exercise
-     * @return true if successfully added, false if type does not exist
-     
-    public boolean addExercise(String type, String exercise){
-        if(this.exercises.containsKey(type)){
-            ArrayList<String> list = this.getExersicesFromType(type);
-            list.add(exercise);
-            this.exercises.put(type, list);
-            return true;
-        }
-        else{
-            return false;
-        }
-
-    }*/
 
     /**
      * gets the Exercise of exercise by id
@@ -71,7 +49,6 @@ public class ManageExercise implements Serializable{
     }
 
     public Exercise getExerciseByName(String name){
-        // ArrayList<Exercise> list = new ArrayList<>();
         for(Exercise e : this.exerciseList){
             if(e.getName().equals(name)){
                 return e;

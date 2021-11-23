@@ -1,9 +1,7 @@
 package src;
 
-//import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.event.*;
 
 public class TaskBarUI extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization

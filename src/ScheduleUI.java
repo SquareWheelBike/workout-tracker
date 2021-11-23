@@ -4,14 +4,11 @@ package src;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.event.*;
 
 
 public class ScheduleUI extends JPanel implements ActionListener {
     private initUI parentUI;
 
-//    private JRadioButton Workout1, Workout2;
-//    private JLabel selectLabel;
 
     private JRadioButton Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday;
     private JLabel selectLabel;

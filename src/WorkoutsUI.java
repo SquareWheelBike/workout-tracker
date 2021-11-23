@@ -4,17 +4,12 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.awt.image.BufferedImage;
-//import javax.swing.event.*;
 
 
 public class WorkoutsUI extends JPanel implements ActionListener {
     private static final long serialVersionUID = 1L; // VERSION NUMBER, needed for serialization
     private initUI parentUI;
     private ManageExercise exercisesManager;
-
-//    private JRadioButton Workout1, Workout2;
-//    private JLabel selectLabel;
 
     private ArrayList<JRadioButton> buttonsList;
     private JLabel selectLabel;
@@ -88,7 +83,6 @@ public class WorkoutsUI extends JPanel implements ActionListener {
     @SuppressWarnings("unchecked")
     public void actionPerformed(ActionEvent e) {
         System.out.print("WorkoutUI: ");
-        //System.out.println("Action Event: " + e.getSource());
         if(e.getSource() instanceof JRadioButton){
             JRadioButton button = (JRadioButton) e.getSource();
             remove(subPanel);
@@ -120,10 +114,6 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         }
     }
 
-    public void setExercise(String option){
-
-    }
-
     public void addDefaultWorkouts(){
         ArrayList<Integer> list = new ArrayList<Integer>();
         list.add(19);
@@ -143,11 +133,8 @@ public class WorkoutsUI extends JPanel implements ActionListener {
      * displays a drop down menu of the types of exercises and displays the exercises for the selected
      */
     public void initSubPanel(JPanel subPanel, String workoutName){
-        
-
         subPanel.setLayout(new BorderLayout(0, 0));
         subPanel.removeAll();
-        //subPanel.setBackground(Color.white);
 
         exersices = new JComboBox<String>();
         
@@ -184,7 +171,6 @@ public class WorkoutsUI extends JPanel implements ActionListener {
         JLabel exercisePic = new JLabel(new ImageIcon(scaledImage));
         exercisesPanel.add(exercisePic, BorderLayout.CENTER);
 
-        //c = gui.setGrid(c, 0, 3);
         descPanel = new JPanel();
         descPanel.setLayout(new GridLayout(10,10));
         descPanel.add(new JLabel ("Reps:"),c);
