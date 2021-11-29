@@ -2,10 +2,7 @@ package src;
 
 import java.awt.*;
 import java.awt.event.*;
-// import java.util.*;
-
 import javax.swing.*;
-//import javax.swing.event.*;
 
 public class ExercisesUI extends JPanel implements ActionListener{
     private initUI parentUI;
@@ -22,6 +19,13 @@ public class ExercisesUI extends JPanel implements ActionListener{
 
         setLayout(new BorderLayout());
         //Creates the drop down menu for the Types
+
+        //Create new panel to format layout
+        typesPanel = new JPanel();
+        //Create new panel to format layout
+        listPanel = new JPanel();
+        //Create new panel to format layout
+        detailsPanel = new JPanel();
         showTypes();
     }
 
@@ -35,27 +39,19 @@ public class ExercisesUI extends JPanel implements ActionListener{
         //If user selected a type
         if (e.getSource() == types) {
             System.out.println("Type Selected: " + types.getSelectedItem());
-            //remove all panels
+            remove(detailsPanel);
+            remove(listPanel);
+            updateFrame();
             
-            //Check if details is already displaying
-            if(detailsPanel != null){
-                if(detailsPanel.isShowing()){
-                    remove(detailsPanel);
-                }
-            }
-            
-            //Check if exercise list is already displaying
-            if(listPanel != null){
-                if(listPanel.isShowing()){
-                    remove(listPanel);
-                }
-            }
             String s = (String) types.getSelectedItem();
             showExercises(s);
         }
 
         //If user selected a exercise from a type
         else if (e.getSource() == exersices) {
+            remove(detailsPanel);
+            updateFrame();
+
             System.out.println("Exercise Selected: " + exersices.getSelectedItem());
             String s = (String) exersices.getSelectedItem();
             //Display exercise details
@@ -79,8 +75,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
      * displays a drop down menu of the types of exercises
      */
     public void showTypes(){
-        //Create new panel to format layout
-        typesPanel = new JPanel();
+        typesPanel.removeAll();
 
         //Create Label for Type of Exercise
         selectType = new JLabel("Please Select a Type of Exersice:  ");
@@ -102,8 +97,7 @@ public class ExercisesUI extends JPanel implements ActionListener{
      * @param type the type of exercise to display
      */
     public void showExercises(String type){
-        //Create new panel to format layout
-        listPanel = new JPanel();
+        listPanel.removeAll();
 
         //Create Label for Exercise
         selectExersice = new JLabel("Please Select a Exersice:  ");
@@ -120,17 +114,13 @@ public class ExercisesUI extends JPanel implements ActionListener{
     }
 
     public void showExerciseDetails(String exercise){
-        if(detailsPanel != null){
-            remove(detailsPanel);
-        }
-        //Create new panel to format layout
-        detailsPanel = new JPanel();
+        detailsPanel.removeAll();
 
         // find exercise from set of exercises
         Exercise e = exercisesManager.getExerciseByName(exercise);
 
         JLabel img = new JLabel(new ImageIcon(e.getScaledImage()));
-        add(img, BorderLayout.CENTER);
+        detailsPanel.add(img, BorderLayout.CENTER);
 
         detailsPanel.add(new JLabel(String.format("Selected Exercise: %s", e.getName())));
 

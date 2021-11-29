@@ -1,11 +1,9 @@
 package src;
 
-//import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
-
+import java.io.*;
 import javax.swing.*;
-//import javax.swing.event.*;
 
 
 public class SettingsUI extends JPanel implements ActionListener {
@@ -58,8 +56,9 @@ public class SettingsUI extends JPanel implements ActionListener {
         else if(e.getSource() == confirmButton) {
             System.out.println("Reseting....");
             reset();
+            System.out.println("Reset Complete");
             parentUI.dispose();
-            new initUI();
+            System.exit(0);
         }
         else if(e.getSource() == submitUserButton) {
             System.out.println("new User Submit");
@@ -82,7 +81,10 @@ public class SettingsUI extends JPanel implements ActionListener {
         }
     }
     public void reset(){
-
+        File file = new File("src/data/lastUser.ser");
+        file.delete();
+        file = new File("src/data/users.ser");
+        file.delete();
     }
 
     public void showReset(){

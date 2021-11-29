@@ -5,7 +5,6 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-//import javax.swing.event.*;
 
 public class ManageUser extends JFrame implements ActionListener{
     private ArrayList<User> list;
@@ -48,27 +47,6 @@ public class ManageUser extends JFrame implements ActionListener{
      */
     public boolean saveUser() {
         System.out.println("Saving users to file...");
-        //serialize user to file
-        /* NOTE (cole): this whole block is redundant, the try-catch block below takes care of it already
-        try{
-            //Check/Create if directory exists
-            // NOTE (cole): this is redundant, dir already exists with pictures in it or program will fail
-            //File dir = new File("data");
-            //dir.mkdirs();
-            //Create file
-            File userFile = new File("src/data/", "users.ser"); 
-            if (userFile.createNewFile()) {
-                System.out.println("User File created: " + userFile.getName());
-            } else {
-                System.out.println("User File already exists. Trying to Save User now");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred creating a user file");
-            e.printStackTrace();
-            return false;
-        }
-        */
-
         try{
             //Write user information to file
             // FileOutputStream will create file if not exist, or truncate existing file
