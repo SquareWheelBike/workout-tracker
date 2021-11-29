@@ -141,7 +141,7 @@ public class ManageUser extends JFrame implements ActionListener{
      * Displays UI for editing user information.
      */
     public void createUserUI(){
-        FormateGUI gui = new FormateGUI();
+        FormatGUI gui = new FormatGUI();
         frame = new JFrame("Create User");
         frame.setTitle("Create User");
         frame.setResizable(false);

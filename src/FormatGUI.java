@@ -3,9 +3,9 @@ package src;
 import java.awt.*;
 
 
-public class FormateGUI {
+public class FormatGUI {
 
-    public FormateGUI(){
+    public FormatGUI(){
     }
 
     public GridBagConstraints setGrid(GridBagConstraints c, int gridX, int gridY, int ipady){

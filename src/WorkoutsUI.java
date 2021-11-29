@@ -19,7 +19,7 @@ public class WorkoutsUI extends JPanel implements ActionListener {
     private JComboBox<String> exersices;
 
     private GridBagConstraints c;
-    private FormateGUI gui;
+    private FormatGUI gui;
 
 
     private ArrayList<Exercise> listInWorkout;
@@ -27,7 +27,7 @@ public class WorkoutsUI extends JPanel implements ActionListener {
 
     public WorkoutsUI(initUI parentUI, ManageExercise exercisesManager) {
         c = new GridBagConstraints();
-        gui = new FormateGUI();
+        gui = new FormatGUI();
 
         this.parentUI = parentUI;
         this.exercisesManager = exercisesManager;
@@ -158,7 +158,7 @@ public class WorkoutsUI extends JPanel implements ActionListener {
 
     public void displayExercise(Exercise exercise){
         //display exercise
-        gui = new FormateGUI();
+        gui = new FormatGUI();
         c = new GridBagConstraints();
         
         //Add exercise name
